@@ -1,0 +1,140 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+/* header start */
+
+header {
+  width: 100vw;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  border-bottom: 4px solid var(--secondary);
+}
+
+.logotipo {
+  display: flex;
+  align-items: first baseline;
+  column-gap: 10px;
+}
+
+.name {
+  font-family: Parisian;
+  color: var(--secondary);
+  width: 50%;
+  font-size: 2.5rem;
+}
+
+.cup {
+  width: 50px;
+}
+
+.iconMenu {
+  font-size: 2.5rem;
+  color: var(--secondary);
+}
+
+/* header end */
+
+/* header menu desplegable start */
+
+.menu-items-container {
+  position: absolute;
+  display: block;
+  top: 80px;
+  right: 0;
+  background-color: var(--secondary);
+  height: 90vh;
+  transition: width 500ms ease-in-out;
+}
+
+.list-items {
+  padding: 2em;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.list-items li{
+  cursor: pointer;
+  font-size: 1.5em;
+  align-self: flex-start;
+}
+
+.menu-item:link, .menu-item:visited {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+.menu-item:active, .menu-item:hover {
+  border-bottom: 1px solid var(--primary);
+}
+
+.openMenu {
+  width: 100vw;
+}
+
+.closeMenu {
+  width: 0;
+}
+
+
+/* header menu desplegable end */
+
+/* main start */
+
+article {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--third);
+  width: 100vw;
+  min-height: 80vh;
+  color: var(--primary);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  padding: 0 2rem;
+  gap:2rem;
+}
+
+article h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.product-container {
+  background-color: var(--secondary);
+  border: 4px dotted var(--primary);
+  border-radius: 1rem;
+  padding: 1.3rem;
+  min-height: 100px;
+}
+
+.desc {
+  text-align: left;
+  font-weight: 500;
+  font-size: 1.7rem;
+}
+
+.price {
+  margin-top: 2rem;
+  font-size: 2rem;
+  text-align: right;
+}
+
+.space {
+  width: 100%;
+  height: 55px;
+}
+
+/* main end */
+
+
