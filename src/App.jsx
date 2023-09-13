@@ -14,6 +14,7 @@ function App() {
       <Main data={data} category={data[36].cat} />
       <Main data={data} category={data[39].cat} />
       <Main data={data} category={data[54].cat} />
+      <div></div>
       <footer>
 
       </footer>

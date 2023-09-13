@@ -90,6 +90,7 @@ header {
 
 
 /* header menu desplegable end */
+/* #################################### */
 
 /* main start */
 
@@ -101,7 +102,7 @@ article {
   color: var(--primary);
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  padding: 0 2rem;
+  padding: 0 2rem 2rem ;
   gap:2rem;
 }
 
@@ -115,18 +116,18 @@ article h1 {
   border: 4px dotted var(--primary);
   border-radius: 1rem;
   padding: 1.3rem;
-  min-height: 100px;
+  min-height: 50px;
 }
 
 .desc {
   text-align: left;
   font-weight: 500;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
 }
 
 .price {
-  margin-top: 2rem;
-  font-size: 2rem;
+  margin-top: 1rem;
+  font-size: 1.4rem;
   text-align: right;
 }
 
