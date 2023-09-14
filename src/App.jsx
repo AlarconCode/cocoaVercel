@@ -12,8 +12,8 @@ function App() {
       <Main data={data} category={data[0].cat} />
       <Main data={data} category={data[10].cat} />
       <Main data={data} category={data[20].cat} />
+      <Main data={data} category={data[35].cat} />
       <Main data={data} category={data[39].cat} />
-      <Main data={data} category={data[57].cat} />
       <Main data={data} category={data[69].cat} />
       <a href="#Desayunos Básicos"><div className='up'><FaArrowUp /></div></a>
       <footer>

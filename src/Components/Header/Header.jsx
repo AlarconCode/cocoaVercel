@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MdClose, MdMenu } from 'react-icons/md'
 import cup from '../../assets/icons/taza-cocoa.svg'
+import cocoa from '../../assets/icons/Cocoa.svg'
 
 function Header () {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,7 +13,8 @@ function Header () {
   return (
       <header>
       <div className='logotipo'>
-        <h1 className='name'>Cocoa</h1>
+        {/* <h1 className='name'>Cocoa</h1> */}
+        <img src={cocoa} alt="icono taza" className='cocoa' />
         <img src={cup} alt="icono taza" className='cup' />
       </div>
       <div className='iconMenu' onClick={handleToggle}>{iconMenu}</div>

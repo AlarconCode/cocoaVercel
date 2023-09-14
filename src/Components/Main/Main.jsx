@@ -11,6 +11,7 @@ function Main ({data, category}) {
         category === product.cat ? 
         <div key={product.id} className='product-container'>
           <h3 className='desc'>{product.desc}</h3>
+          <p>{ product.ingredientes }</p>
           <h3 className='price'>{product.price}</h3>
         </div> :
         null
