@@ -63,17 +63,17 @@ header {
 
 .list-items {
   width: 100vw;
-  height: 80vh;
+  height: 50vh;
   padding: 2rem;
   list-style: none;
 }
 
 .menu-item {
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  line-height: 3.5rem;
-  transition: all 500ms ease-out;  
+  line-height: 3rem;
+  transition: font-weight 500ms ease-out;  
 }
 
 .menu-item:link, .menu-item:visited {
@@ -110,11 +110,11 @@ article {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 0 2rem 2rem ;
-  gap:2rem;
+  gap: 2rem;
 }
 
 article h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
@@ -144,19 +144,19 @@ article h1 {
 }
 
 .up {
-  z-index: 999;
+  z-index: 9;
   position: fixed;
   top: 80vh;
-  left: 80vw;
-  width: 50px;
-  height: 50px;
+  left: 5vw;
+  width: 30px;
+  height: 30px;
   background-color: var(--primary);
-  font-size: 2rem;
+  font-size: 1.2rem;
   color: var(--secondary);
   border-radius: 100%;
   text-align: center;
   padding: 3px;
-  box-shadow: 0px 0px 8px 4px rgba(0,0,0,.4);
+  box-shadow: 0px 0px 4px 4px rgba(3,3,3,.1);
   transition: all 500ms ease-in-out;
 }
 

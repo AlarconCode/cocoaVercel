@@ -1,4 +1,5 @@
 
+import { FaArrowUp } from "react-icons/fa6";
 
 function Main ({data, category}) {
   
@@ -16,6 +17,7 @@ function Main ({data, category}) {
         </div> :
         null
       ))}
+      <a href="#Desayunos Básicos"><div className='up'><FaArrowUp /></div></a>
 
     </article>
   )
