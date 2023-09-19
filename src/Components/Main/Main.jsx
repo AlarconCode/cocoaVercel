@@ -4,7 +4,7 @@ import { FaArrowUp } from "react-icons/fa6";
 function Main ({data, category}) {
   
   return (
-    <article>
+    <main>
       <div id={category} className="space"></div>
       <h1>{category}</h1>
 
@@ -19,7 +19,7 @@ function Main ({data, category}) {
       ))}
       <a href="#Desayunos Básicos"><div className='up'><FaArrowUp /></div></a>
 
-    </article>
+    </main>
   )
 }
 

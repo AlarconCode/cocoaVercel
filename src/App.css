@@ -101,7 +101,7 @@ header {
 
 /* main start */
 
-article {
+main {
   font-family: 'Lato', sans-serif;
   background-color: var(--third);
   width: 100vw;
@@ -113,7 +113,7 @@ article {
   gap: 2rem;
 }
 
-article h1 {
+main h1 {
   font-size: 1.5rem;
   font-weight: 700;
 }
