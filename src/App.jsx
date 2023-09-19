@@ -6,7 +6,6 @@ import Cafes from './Pages/Cafes/Cafes'
 import Comidas from './Pages/Comidas/Comidas'
 import Desayunos from './Pages/Desayunos/Desayunos'
 import Reposteria from './Pages/Reposteria/Reposteria'
-import data from './data/data.json'
 
 
 function App() {

@@ -1,14 +1,30 @@
 
+import { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa6";
 
-function Main ({data, category}) {
+function Main ({category}) {
+  const url = `http://localhost:4000/carta`
+  const [productList, setProductList] = useState([])
+  const [body, setBody] = useState()
+  
+  useEffect(() => {
+    const fetchList = async () => {
+      const res = await fetch(url)
+      const data = await res.json()
+      console.log(data);    
+      setProductList(data)
+    }
+    
+    fetchList()
+
+  }, [])
   
   return (
     <main>
       <div id={category} className="space"></div>
       <h1>{category}</h1>
 
-      {data.map((product, index) => (
+      {productList.map((product, index) => (
         category === product.cat ? 
         <div key={product.id} className='product-container'>
           <h3 className='desc'>{product.desc}</h3>
