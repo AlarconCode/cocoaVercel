@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const url = `localhost:4000/carta`
+const url = `http://localhost:4000/carta`
 
 const getProducts = () => {
   const [productList, setProductList] = useState([])

@@ -1,24 +1,11 @@
-
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa6";
+import getProducts from "../../services/apiCalls";
 
 function Main ({category}) {
-  const url = `http://localhost:4000/carta`
-  const [productList, setProductList] = useState([])
-  const [body, setBody] = useState()
   
-  useEffect(() => {
-    const fetchList = async () => {
-      const res = await fetch(url)
-      const data = await res.json()
-      console.log(data);    
-      setProductList(data)
-    }
-    
-    fetchList()
+  const productList = getProducts()
 
-  }, [])
-  
   return (
     <main>
       <div id={category} className="space"></div>
