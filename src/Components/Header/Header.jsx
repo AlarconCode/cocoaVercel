@@ -6,7 +6,11 @@ import cafeTime from '../../assets/img/Dibujo-Granos-CafeTime.svg'
 
 function Header () {
   const [isOpen, setIsOpen] = useState(false)
-  const handleToggle = () => setIsOpen(prev => !prev)
+  const handleToggle = (e) => {
+    e.stopPropagation()
+    setIsOpen(prev => !prev)
+  }
+  
   const iconMenuRef = useRef()
 
   useEffect(() => {
@@ -14,8 +18,10 @@ function Header () {
     const closeMenu = e => {
       const arrPath = e.composedPath()
       // console.log(arrPath)
-      // console.log(iconMenuRef.current);
-      if (arrPath[1] != iconMenuRef.current) {
+      console.log(e.target);
+      console.log(iconMenuRef.current.className);
+      console.log('click closeMenu');
+      if (e.target.className != iconMenuRef.current.className && e.target.className != 'list-items')  {
         setIsOpen(false)
       }
     }
