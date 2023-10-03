@@ -1,10 +1,22 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa6";
-import getProducts from "../../services/apiCalls";
+import { getProductsRequest } from "../../services/product.services";
 
 function Main ({category}) {
+  const [productList, setProductList] = useState([])
   
-  const productList = getProducts()
+  useEffect(() => {
+    const data = async () => {
+      try {
+        const data = await getProductsRequest()
+        setProductList(data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    data()
+  }, [])
+
 
   return (
     <main>
