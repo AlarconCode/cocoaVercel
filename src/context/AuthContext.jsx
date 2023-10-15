@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
-import { loginRequest, registerRequest } from "../services/user.services";
+import { createContext, useContext, useEffect, useState } from "react";
+import { loginRequest, registerRequest, logoutRequest } from "../services/user.services";
+import { setToken } from "../services/product.services";
 
 export const AuthContext = createContext()
 
@@ -42,8 +43,12 @@ export const AuthProvider = ({children}) => {
       
       const res = await loginRequest(values)
       if (!res.error) {
-
-        setUser(res.userLogin)
+        
+        window.localStorage.setItem(
+          'loggedUser', JSON.stringify(res)
+        )
+        setUser(res.user)
+        setToken(res.token)
         setIsLogin(true)
       
       } else {
@@ -58,12 +63,42 @@ export const AuthProvider = ({children}) => {
     }
   }
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const userLogged = JSON.parse(loggedUserJSON)
+      setUser(userLogged.user)
+      setToken(userLogged.token)
+      setIsLogin(true)
+    }
+  }, [])
+  
+  
+  const logout = async () => {
+    
+    try {
+
+      const res = await logoutRequest()
+      console.log(res);
+      setUser(null)
+      setToken(null)
+      setIsLogin(false)
+      window.localStorage.clear()
+
+    } catch (error) {
+      console.log(error);  
+    }
+
+  }
+
+
 
   return (
     <AuthContext.Provider
       value={{
         register,
         login,
+        logout,
         user,
         isLogin,
         error

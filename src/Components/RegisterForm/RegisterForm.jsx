@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Formik, useFormik } from "formik"
 import { useAuth } from '../../context/AuthContext'
-import './registerForm.css'
+import '../../app.css'
 import * as Yup from 'yup';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -31,10 +31,11 @@ export const RegisterForm = () => {
     if (isLogin) navigate('/')
   }, [isLogin])  
   
-  const onSubmit = async (values) => {
-    register(values)
+  const onSubmit = async (values, onSubmitProps) => {
+    await register(values)
+    onSubmitProps.setSubmitting(false)
   }
-
+  
   return (
     <Formik
       initialValues={initialValues}
@@ -72,7 +73,8 @@ export const RegisterForm = () => {
             <Field name='img' type='file' />
             <ErrorMessage name="img" component='span' />
           </div>
-          <button type="submit">Enviar</button>
+          <button type="submit" className="buttonForm">Enviar</button>
+          <button type='button' className="buttonForm" onClick={()=>{navigate(-1)}}> Atrás</button>
       </form>
       )}
     </Formik> 
@@ -107,7 +109,7 @@ export const RegisterForm = () => {
 //   return (
 //     <>
 //       <form onSubmit={formik.handleSubmit}>
-//         <h1 className="titleRegisterForm">Resgistro</h1>
+//         <h1 className="titleRegisterForm">Registro</h1>
 //         <div className="form-control">
 //           <label htmlFor="name">Nombre</label>
 //           <input

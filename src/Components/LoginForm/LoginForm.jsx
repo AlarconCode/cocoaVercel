@@ -1,9 +1,10 @@
 import { ErrorMessage, Field, Formik, useFormik } from "formik"
 import { useAuth } from '../../context/AuthContext'
-import '../RegisterForm/registerForm.css'
+import '../../app.css'
 import * as Yup from 'yup';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   email: '',
@@ -27,7 +28,6 @@ export const LoginForm = () => {
   }, [isLogin])  
   
   const onSubmit = async (values) => {
-    console.log(values);
     login(values)
   }
 
@@ -53,7 +53,12 @@ export const LoginForm = () => {
             <Field name='password' type='password' />
             <ErrorMessage name="password" component='span' />
           </div>
-          <button type="submit">Entrar</button>
+          <button 
+            type="submit"
+            className="buttonForm">
+              Entrar
+          </button>
+          <p>¿No tienes cuenta? <Link to='/registro'>Regístrate</Link></p>
       </form>
       )}
     </Formik> 
