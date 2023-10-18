@@ -124,9 +124,8 @@ export const ProductForm = ({...props}) => {
           <div className="form-control">
             <label htmlFor="cat">Categoría</label>
             <Field as='select' name='cat' type='text'>
-              <option value="Desayunos Básicos">Desayunos Básicos</option>
-              <option value="Desayunos Completos">Desayunos Completos</option>
-              <option value="Café 100% Arábigo">Café 100% Arábigo</option>
+              <option value="Desayunos">Desayunos</option>
+              <option value="cafes">Cafes</option>
               <option value="Repostería Casera">Repostería Casera</option>
               <option value="Comidas">Comidas</option>
               <option value="Bebidas">Bebidas</option>
@@ -150,7 +149,7 @@ export const ProductForm = ({...props}) => {
           </div>
           <div className="form-control">
             <label htmlFor="img"></label>
-            <Field name='img' type='file' />
+            <Field name='img' type='text' />
             <ErrorMessage name="img" component='span' />
           </div>
           <button 

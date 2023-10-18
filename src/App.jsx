@@ -1,11 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Header from './Components/Header/Header'
-import Bebidas from './Pages/Bebidas/Bebidas'
-import Cafes from './Pages/Cafes/Cafes'
-import Comidas from './Pages/Comidas/Comidas'
-import Desayunos from './Pages/Desayunos/Desayunos'
-import Reposteria from './Pages/Reposteria/Reposteria'
+import Main from "./Components/Main/Main";
 import { RegisterPage } from "./Pages/Register/registerPage";
 import { AuthProvider } from "./context/AuthContext";
 import { LoginPage } from "./Pages/LoginPage/LoginPage";
@@ -23,12 +19,11 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/Desayunos" element={<Desayunos />} />
-          {/* <Route path="desayunos" element={<Desayunos />} /> */}
-          <Route path="cafes" element={<Cafes />} />
-          <Route path="reposteria" element={<Reposteria />} />
-          <Route path="comidas" element={<Comidas />} /> 
-          <Route path="bebidas" element={<Bebidas />} />
+          <Route path="desayunos" element={<Main category='Desayunos' />} />
+          <Route path="cafes" element={<Main category='cafes' />} />
+          <Route path="reposteria" element={<Main category='Repostería Casera' />} />
+          <Route path="comidas" element={<Main category='Comidas' />} /> 
+          <Route path="bebidas" element={<Main category='Bebidas' />} />
           <Route path="crear-producto" element={<ProductFormPage />} />
           <Route path="actualizar-producto/:id" element={<ProductFormPage />} />
           <Route path="registro" element={<RegisterPage />} />

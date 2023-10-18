@@ -27,10 +27,10 @@ export const ProductProvider = ({children}) => {
     }
   }
 
-  const getProducts = async () => {
+  const getProducts = async (cat) => {
     try {
       
-      const products = await getProductsRequest()
+      const products = await getProductsRequest(cat)
       return products
 
     } catch (error) {

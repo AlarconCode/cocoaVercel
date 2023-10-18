@@ -17,11 +17,11 @@ export const getProductRequest = async (id) => {
 
 }
 
-export const getProductsRequest = async () => {
+export const getProductsRequest = async (cat) => {
 
   try {
     
-    const res = await fetch(`${url}products`)
+    const res = await fetch(`${url}products/${cat}`)
     const data = await res.json()    
     return data
 
