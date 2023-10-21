@@ -71,7 +71,7 @@ function ListCards(props) {
         ) : null}
       </div>
 
-      {productList.map((product, index) => (
+      {productList.map((product, index) => 
         <Card
           product={product}
           key={product._id}
@@ -80,7 +80,7 @@ function ListCards(props) {
             deleteProductIcon(product._id);
           }}
         />
-      ))}
+      )}
     </section>
   );
 }
