@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { func, number, shape, string } from 'prop-types'
 import {
   FaPenToSquare,
   FaRegTrashCan,
 } from "react-icons/fa6";
 import logoCocoa from "../../assets/icons/taza-cocoa-marron.svg";
 
-export const Card = (product, index) => {
+export const Card = ({product, index, deleteCard}) => {
   const {_id, desc, ingredientes, price, img} = product
-
   const { isLogin } = useAuth();
   const [flippedState, setFlippedState] = useState({});
 
@@ -19,7 +19,6 @@ export const Card = (product, index) => {
       [index]: !flippedState[index],
     });
   };
-
 
   return (
     <>
@@ -43,9 +42,7 @@ export const Card = (product, index) => {
                 </Link>
                 <Link
                   style={{ color: "#7FABC2" }}
-                  onClick={() => {
-                    deleteProductIcon(_id);
-                  }}
+                  onClick={deleteCard}
                 >
                   <FaRegTrashCan />
                 </Link>
@@ -69,4 +66,16 @@ export const Card = (product, index) => {
           </div>
     </>
   )
+}
+
+Card.propTypes = {
+  product: shape({
+    _id: string,
+    desc: string,
+    ingredientes: string,
+    price: string,
+    img: string
+  }),
+  index: number,
+  deleteCard: func
 }

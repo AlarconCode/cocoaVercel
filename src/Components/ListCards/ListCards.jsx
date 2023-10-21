@@ -1,29 +1,18 @@
 import { useState, useEffect } from "react";
-import {
-  FaPenToSquare,
-  FaRegTrashCan,
-  FaRegSquarePlus,
-} from "react-icons/fa6";
+import { FaRegSquarePlus } from "react-icons/fa6";
 import { useAuth } from "../../context/AuthContext";
 import { useProduct } from "../../context/ProductContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import logoCocoa from "../../assets/icons/taza-cocoa-marron.svg";
+import { string } from "prop-types";
+import { Card } from "../Card/Card";
 
 function ListCards(props) {
   const category = props.category;
   const [productList, setProductList] = useState([]);
-  const [flippedState, setFlippedState] = useState({});
   const { getProducts, deleteProduct } = useProduct();
   const { isLogin } = useAuth();
   const navigate = useNavigate();
-
-  const handleClickFlipped = (index) => {
-    setFlippedState({
-      isFlipped: !flippedState.isFlipped,
-      [index]: !flippedState[index],
-    });
-  };
 
   useEffect(() => {
     const products = async () => {
@@ -83,55 +72,21 @@ function ListCards(props) {
       </div>
 
       {productList.map((product, index) => (
-        <>
-          <div
-            key={product._id}
-            className={`card ${flippedState[index] ? "flipped" : ""}`}
-            onClick={() => handleClickFlipped(index)}
-          >
-            <div className="card-product front">
-              <div className="description-product">
-                <h3>{product.desc}</h3>
-                <p>{product.ingredientes}</p>
-                <h2 className="price">{product.price}</h2>
-              </div>
-              <div className={isLogin ? "icons-container show" : "hide"}>
-                <Link
-                  to={`/actualizar-producto/${product._id}`}
-                  style={{ color: "#7FABC2" }}
-                >
-                  <FaPenToSquare />
-                </Link>
-                <Link
-                  style={{ color: "#7FABC2" }}
-                  onClick={() => {
-                    deleteProductIcon(product._id);
-                  }}
-                >
-                  <FaRegTrashCan />
-                </Link>
-              </div>
-            </div>
-            <div className="card-product back">
-              {product.img ? (
-                <img
-                  alt={product.desc}
-                  src={product.img}
-                  className="img-product"
-                />
-              ) : (
-                <img
-                  alt={product.desc}
-                  src={logoCocoa}
-                  className="logoCocoa"
-                />
-              )}
-            </div>
-          </div>
-        </>
+        <Card
+          product={product}
+          key={product._id}
+          index={index}
+          deleteCard={() => {
+            deleteProductIcon(product._id);
+          }}
+        />
       ))}
     </section>
   );
 }
 
 export default ListCards;
+
+ListCards.propTypes = {
+  category: string,
+};
