@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import {
-  FaArrowUp,
   FaPenToSquare,
   FaRegTrashCan,
   FaRegSquarePlus,
-  FaImage,
 } from "react-icons/fa6";
 import { useAuth } from "../../context/AuthContext";
 import { useProduct } from "../../context/ProductContext";
@@ -12,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import logoCocoa from "../../assets/icons/taza-cocoa-marron.svg";
 
-function Main(props) {
+function ListCards(props) {
   const category = props.category;
   const [productList, setProductList] = useState([]);
   const [flippedState, setFlippedState] = useState({});
@@ -26,8 +24,6 @@ function Main(props) {
       [index]: !flippedState[index],
     });
   };
-
-  console.log(flippedState);
 
   useEffect(() => {
     const products = async () => {
@@ -138,4 +134,4 @@ function Main(props) {
   );
 }
 
-export default Main;
+export default ListCards;
