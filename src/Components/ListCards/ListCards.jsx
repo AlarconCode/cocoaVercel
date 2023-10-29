@@ -70,8 +70,9 @@ function ListCards(props) {
           </i>
         ) : null}
       </div>
-
+          {console.log(productList)}
       {productList.map((product, index) => 
+        // ¡Ojo Lleva return implícito y no necesita llaves al ser una sola linea!
         <Card
           product={product}
           key={product._id}

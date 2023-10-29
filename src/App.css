@@ -5,6 +5,11 @@
   text-decoration: none;
 }
 
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
 
 /* header start */
 
@@ -18,7 +23,7 @@ header {
   display: flex;
   align-items: center;
   padding: 2rem;
-  border-bottom: 4px solid var(--secondary);
+  border-bottom: 4px solid var(--third);
   z-index: 10;
 }
 
@@ -137,7 +142,7 @@ header {
   color: var(--primary);
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  padding: 80px 2rem 80px 2rem ;
+  padding: 80px 2rem 100px 2rem ;
   gap: 2rem;
   overflow: hidden;
 }
@@ -300,7 +305,7 @@ form {
   margin-bottom: 1rem;
 }
 
-label {
+.form-control label {
   display: block;
   color: var(--primary);
   margin-bottom: 5px;
@@ -312,6 +317,7 @@ input, select {
   height: 2rem;
   border: none;
   border-radius: 4px;
+  padding-left: 10px;
 }
 
 .buttonForm {
@@ -328,9 +334,41 @@ input, select {
 
 .errorMessage {
   background-color: rgba(185, 0, 0, 0.832);
-  color: white;
+  color: var(--third);
   padding: .5rem;
   margin-bottom: 1rem;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + .labelFileInput {
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+}
+
+.inputfile-2 + .labelFileInput {
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.inputfile-2:focus + .labelFileInput,
+.inputfile-2.has-focus + .labelFileInput,
+.inputfile-2 + .labelFileInput:hover {
+  color: var(--primary);
 }
 
 /* CSS Forms Register and Product #######END##### */
@@ -340,11 +378,13 @@ input, select {
 
 .homepage-container {
   width: 100vw;
-  max-height: 80vh;
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  padding: 0 2rem 2rem ;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+  background-color: var(--third);
+  padding: 100px 2rem 100px 2rem ;
+  gap: 1rem;
 }
 
 .homepage-link {
@@ -353,11 +393,54 @@ input, select {
   color: var(--primary);
   padding: 1rem;
   text-align: center;
+  min-height: 100%;
 }
-
-
 
 
 /* HomePage END */
 
 
+/* Footer START */
+
+footer {
+  width: 100vw;
+  height: 80px;
+  border-top: 4px solid var(--third);
+  background-color: var(--secondary);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 3rem;
+  color: var(--primary);
+  position: fixed;
+  bottom: 0;
+}
+
+img {
+  height: 70%;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+footer button {
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  display: inline-flex;
+  cursor: pointer;
+  font-size: 3rem;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+
+}
+
+/* Footer END */

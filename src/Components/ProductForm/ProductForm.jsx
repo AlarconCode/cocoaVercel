@@ -1,28 +1,14 @@
-import { ErrorMessage, Field, Formik, useFormik } from "formik"
+import { ErrorMessage, Field, Formik } from "formik"
 import { useAuth } from '../../context/AuthContext'
 import '../../app.css'
 import * as Yup from 'yup';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProduct } from "../../context/ProductContext";
 import Swal from "sweetalert2";
+import { FileUpload } from "../FileUpload/FileUpload";
 
 
-const initialValues = {
-  cat: '',
-  desc: '',
-  ingredientes: '',
-  price: '',
-  img: ''
-}
-
-const validationSchema = Yup.object({
-  cat: Yup.string().required('Campo requerido'),
-  desc: Yup.string().max(255,'Debe tener menos caracteres'),
-  ingredientes: Yup.string().max(255,'Debe tener menos caracteres'),
-  price: Yup.string().required('precio requerido'),
-  img: Yup.string()
-})
 
 
 // Formulario con Componentes Formik Contexto
@@ -32,8 +18,32 @@ export const ProductForm = ({...props}) => {
   const { createProduct, getSingleProduct, updateProduct } = useProduct()
   const params = useParams()
   const navigate = useNavigate()
+  
+  const initialValues = {
+    cat: '',
+    desc: '',
+    ingredientes: '',
+    price: '',
+    img: null
+  }
+  
+  const validationSchema = Yup.object({
+    cat: Yup.string().required('Campo requerido'),
+    desc: Yup.string().max(255,'Debe tener menos caracteres'),
+    ingredientes: Yup.string().max(255,'Debe tener menos caracteres'),
+    price: Yup.string().required('precio requerido')
+  })
+  
 
-  const onSubmitCreateProduct = (values) => {
+  const onSubmitCreateProduct = (values, onSubmitProps) => {
+
+    const formData = new FormData()
+    formData.append('cat', values.cat)
+    formData.append('desc', values.desc)
+    formData.append('ingredientes', values.ingredientes)
+    formData.append('price', values.price)
+    formData.append('img', values.img)
+
     Swal.fire({
       title: `Añadir ${values.desc}`,
       icon: 'info',
@@ -44,7 +54,7 @@ export const ProductForm = ({...props}) => {
       cancelButtonColor: 'red'
     }).then(res => {
       if(res.isConfirmed) {
-        createProduct(values)
+        createProduct(formData)
         Swal.fire({
           icon: 'success',
           title: `${values.desc} Añadida`,
@@ -64,6 +74,15 @@ export const ProductForm = ({...props}) => {
   }
  
   const onSubmitUpdateProduct = (values, onSubmitProps) => {
+
+    const formData = new FormData()
+    formData.append('_id', params.id)
+    formData.append('cat', values.cat)
+    formData.append('desc', values.desc)
+    formData.append('ingredientes', values.ingredientes)
+    formData.append('price', values.price)
+    formData.append('img', values.img)
+
     Swal.fire({
       title: '¿Actualizar?',
       icon: 'info',
@@ -74,7 +93,7 @@ export const ProductForm = ({...props}) => {
       cancelButtonColor: 'red'
     }).then(res => {
       if(res.isConfirmed) {
-        updateProduct(values)
+        updateProduct(formData)
         Swal.fire({
           icon: 'success',
           title: '¡Actualizado!',
@@ -93,8 +112,6 @@ export const ProductForm = ({...props}) => {
     })
   }
 
-
-
   useEffect(() => {
     const getUpdateProduct = async () => {
       if (params.id) {
@@ -103,7 +120,7 @@ export const ProductForm = ({...props}) => {
       }
     }
     getUpdateProduct()
-  }, [params.id])
+  }, [params.id, getSingleProduct])
 
   return (
     <Formik
@@ -112,11 +129,13 @@ export const ProductForm = ({...props}) => {
       onSubmit={!params.id ? onSubmitCreateProduct : onSubmitUpdateProduct}
       enableReinitialize = {true}
       isSubmitting = {false}
+      
     >
       {formik => {
-        console.log('formikProps', formik)
+        // console.log('formikProps', formik)
+        console.log('value file', formik.values)
         return (
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
           <h1 className="titleRegisterForm">{props.title}</h1>
           {
             error ? <div className="errorMessage">{error}</div> : null
@@ -149,9 +168,11 @@ export const ProductForm = ({...props}) => {
           </div>
           <div className="form-control">
             <label htmlFor="img"></label>
-            <Field name='img' type='text' />
-            <ErrorMessage name="img" component='span' />
-          </div>
+            {/* <Field name='img' type='file'/> */}
+            <input type="file" name='img' onChange={(e) => formik.setFieldValue('img', e.target.files[0])}/>
+            <ErrorMessage name="img" component='span'/>
+            {/* <FileUpload name="img" fileRef={fileRef} /> */}
+          </div> 
           <button 
             type="submit" 
             disabled={!formik.isValid || formik.isSubmitting} 
@@ -159,7 +180,6 @@ export const ProductForm = ({...props}) => {
             className="buttonForm">
               Guardar
           </button>
-          <button type='button' className="buttonForm" onClick={()=>{navigate(-1)}}> Atrás</button>
       </form>
         )
       }}

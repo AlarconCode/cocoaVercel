@@ -1,14 +1,6 @@
-import { Link, useNavigate } from "react-router-dom"
-import { FaArrowUp, FaPenToSquare, FaRegTrashCan, FaRegSquarePlus, FaImage } from "react-icons/fa6";
-
-
+import { Link } from "react-router-dom"
 
 export const HomePage = () => {
-  const navigate = useNavigate()
-  
-  const navigateToFormProduct = () => {
-    navigate('/crear-producto')
-  }  
   
   return (
     <section className="homepage-container">

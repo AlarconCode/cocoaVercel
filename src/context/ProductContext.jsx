@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getProductsRequest, getProductRequest, createProductRequest, updateProductRequest, deleteProductRequest } from "../services/product.services";
+import { getProductsRequest, getProductRequest, createProductRequest, updateProductRequest, deleteProductRequest, uploadImageRequest } from "../services/product.services";
 import { useAuth } from "./AuthContext";
 
 export const ProductContext = createContext()
@@ -80,6 +80,14 @@ export const ProductProvider = ({children}) => {
 
   }
 
+  const uploadImg = async () => {
+    try {
+      await uploadImageRequest()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <ProductContext.Provider
       value={{
@@ -87,7 +95,8 @@ export const ProductProvider = ({children}) => {
         getSingleProduct,
         createProduct,
         updateProduct,
-        deleteProduct
+        deleteProduct,
+        uploadImg
       }}
     >
       {children}

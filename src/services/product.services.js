@@ -35,10 +35,9 @@ export const createProductRequest = async (product) => {
 
   const options = {
     method: 'POST',
-    body: JSON.stringify(product),
+    body: product,
     headers: { 
       'Authorization': token,
-      'Content-Type': 'application/json'
     }
   }
 
@@ -58,16 +57,15 @@ export const updateProductRequest = async (product) => {
 
   const options = {
     method: 'PUT',
-    body: JSON.stringify(product),
+    body: product,
     headers: { 
-      'Authorization': token,
-      'Content-Type': 'application/json'
+      'Authorization': token
     }
   }
 
   try {
-    
-    const res = await fetch(`${url}product/${product._id}`, options)
+    console.log(product);
+    const res = await fetch(`${url}product/${product.get('_id')}`, options)
     const data = await res.json()
     return data
 
@@ -90,6 +88,28 @@ export const deleteProductRequest = async (id) => {
   try {
     
     const res = await fetch(`${url}product/${id}`, options)
+    const data = await res.json()
+    return data
+
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
+export const uploadImageRequest = async (file) => {
+
+  const options = {
+    method: 'POST',
+    body: file,
+    headers: {
+      'Authorization': token
+    }
+  }
+
+  try {
+    
+    const res = await fetch(`${url}upload`, options)
     const data = await res.json()
     return data
 
