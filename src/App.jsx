@@ -2,13 +2,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Header from './Components/Header/Header'
 import ListCards from "./Components/ListCards/ListCards";
-import { RegisterPage } from './Pages/Register/registerPage';
 import { AuthProvider } from "./context/AuthContext";
 import { LoginPage } from "./Pages/LoginPage/LoginPage";
 import { ProductFormPage } from "./Pages/ProductFormPage/ProductFormPage";
 import { ProductProvider } from "./context/ProductContext";
 import { HomePage } from "./Pages/HomePage/HomePage";
 import { Footer } from "./Components/Footer/Footer";
+import { RegisterPage } from "./Pages/Register/RegisterPage";
 
 
 function App() {
