@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Header from './Components/Header/Header'
 import ListCards from "./Components/ListCards/ListCards";
-import { RegisterPage } from "./Pages/Register/registerPage";
+import { RegisterPage } from './Pages/Register/registerPage';
 import { AuthProvider } from "./context/AuthContext";
 import { LoginPage } from "./Pages/LoginPage/LoginPage";
 import { ProductFormPage } from "./Pages/ProductFormPage/ProductFormPage";
