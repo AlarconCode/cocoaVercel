@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, Formik, useFormik } from "formik"
 import { useAuth } from '../../context/AuthContext'
-import '../../app.css'
-import * as Yup from 'yup';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import * as Yup from 'yup';
+import '../../app.css';
 
 const initialValues = {
   name: '',
