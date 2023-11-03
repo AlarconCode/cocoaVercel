@@ -1,12 +1,11 @@
 import { ErrorMessage, Field, Formik } from "formik"
 import { useAuth } from '../../context/AuthContext'
-import '../../app.css'
 import * as Yup from 'yup';
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProduct } from "../../context/ProductContext";
 import Swal from "sweetalert2";
-import { FileUpload } from "../FileUpload/FileUpload";
+import '../../app.css';
 
 
 
