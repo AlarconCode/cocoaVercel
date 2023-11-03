@@ -1,7 +1,7 @@
-import { token } from "./product.services"
+const url = import.meta.env.VITE_BASE_URL
+console.log(url);
 
 export const registerRequest = async (user) => {
-  const url = `http://localhost:4000/api/`
   const options = {
     method: 'POST',
     body: JSON.stringify(user),
@@ -24,7 +24,6 @@ export const registerRequest = async (user) => {
 }
 
 export const loginRequest = async (user) => {
-  const url = `http://localhost:4000/api/`
   const options = {
     method: 'POST',
     // credentials: 'include',
@@ -50,8 +49,6 @@ export const logoutRequest = async () => {
 
   const loggedUserJSON = window.localStorage.getItem('loggedUser')
   const userLogged = JSON.parse(loggedUserJSON) 
-  
-  const url = `http://localhost:4000/api/`
   
   const options = {
     method: 'POST',

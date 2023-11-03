@@ -1,4 +1,4 @@
-const url = `http://localhost:4000/api/`
+const url = import.meta.env.VITE_BASE_URL
 
 export let token = null
 export const setToken = newToken => {token = `Bearer ${newToken}` }
@@ -37,7 +37,7 @@ export const createProductRequest = async (product) => {
     method: 'POST',
     body: product,
     headers: { 
-      'Authorization': token,
+      'Authorization': token
     }
   }
 
@@ -66,8 +66,9 @@ export const updateProductRequest = async (product) => {
   try {
     console.log(product);
     const res = await fetch(`${url}product/${product.get('_id')}`, options)
-    const data = await res.json()
-    return data
+    // const data = await res.json()
+    // return data
+    return res
 
   } catch (error) {
     console.log(error);
