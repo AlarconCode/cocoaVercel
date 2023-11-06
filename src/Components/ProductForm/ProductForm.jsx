@@ -1,18 +1,15 @@
 import { ErrorMessage, Field, Formik } from "formik"
 import { useAuth } from '../../context/AuthContext'
 import * as Yup from 'yup';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProduct } from "../../context/ProductContext";
 import Swal from "sweetalert2";
-import '../../app.css';
-
-
 
 
 // Formulario con Componentes Formik Contexto
 export const ProductForm = ({...props}) => {  
-  const {isLogin, error} = useAuth()
+  const { error } = useAuth()
   const [values, setValues] = useState(null)
   const { createProduct, getSingleProduct, updateProduct } = useProduct()
   const params = useParams()

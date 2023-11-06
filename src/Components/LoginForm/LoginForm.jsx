@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import '../../app.css';
 
 const initialValues = {
   email: '',
@@ -25,7 +24,7 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (isLogin) navigate('/')
-  }, [isLogin, navigate])  
+  }, [isLogin])  
   
   const onSubmit = async (values) => {
     login(values)

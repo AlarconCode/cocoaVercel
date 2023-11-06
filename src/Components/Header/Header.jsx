@@ -22,7 +22,6 @@ function Header () {
   useEffect(() => {
     
     const closeMenu = e => {
-      const arrPath = e.composedPath()
       if (e.target.className != iconMenuRef.current.className && e.target.className != 'list-items')  {
         setIsOpen(false)
       }
