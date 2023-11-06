@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, Formik, useFormik } from "formik"
+import { ErrorMessage, Field, Formik } from "formik"
 import { useAuth } from '../../context/AuthContext'
 import * as Yup from 'yup';
 import { useEffect } from "react";
@@ -25,7 +25,7 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (isLogin) navigate('/')
-  }, [isLogin])  
+  }, [isLogin, navigate])  
   
   const onSubmit = async (values) => {
     login(values)
