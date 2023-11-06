@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { string } from "prop-types";
 import { Card } from "../Card/Card";
+import styled from "styled-components";
 
 function ListCards(props) {
+  // Logic ListCards
   const category = props.category;
   const [productList, setProductList] = useState([]);
   const { getProducts, deleteProduct } = useProduct();
@@ -60,33 +62,74 @@ function ListCards(props) {
     navigate("/crear-producto");
   };
 
+  // JSX ListCardas
   return (
-    <section className="container-product">
-      <div className="header-title">
+    <Wrapper>
+      <Title>
         <h1>{category === "cafes" ? "Cafes 100% Arábigo" : category}</h1>
         {isLogin ? (
           <i onClick={navigateToFormProduct}>
             Añadir <FaRegSquarePlus />
           </i>
         ) : null}
-      </div>
-          {console.log(productList)}
-      {productList.map((product, index) => 
-        // ¡Ojo Lleva return implícito y no necesita llaves al ser una sola linea!
-        <Card
-          product={product}
-          key={product._id}
-          index={index}
-          deleteCard={() => {
-            deleteProductIcon(product._id);
-          }}
-        />
-      )}
-    </section>
+      </Title>
+      <Section className="container-product">
+        {productList.map((product, index) => (
+          // ¡Ojo Lleva return implícito y no necesita llaves al ser una sola linea!
+          <Card
+            product={product}
+            key={product._id}
+            index={index}
+            deleteCard={() => {
+              deleteProductIcon(product._id);
+            }}
+          />
+        ))}
+      </Section>
+    </Wrapper>
   );
 }
 
 export default ListCards;
+
+// styles ListCards
+
+const Wrapper = styled.section`
+
+  width: 100vw;
+  min-height: 80vh;
+  background-color: var(--third);
+  padding: 2rem 2rem 8rem 2rem;
+  color: var(--primary);
+
+`
+
+const Title = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    font-weight: 700;
+    margin: 4rem 0 2rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    i {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-size: 1.3rem;
+      column-gap: 1rem;
+    }
+`
+
+const Section = styled.section`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+`;
 
 ListCards.propTypes = {
   category: string,
