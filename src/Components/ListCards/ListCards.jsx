@@ -97,7 +97,6 @@ export default ListCards;
 const Wrapper = styled.section`
 
   width: 100vw;
-  min-height: 80vh;
   background-color: var(--third);
   padding: 2rem 2rem 8rem 2rem;
   color: var(--primary);
