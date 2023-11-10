@@ -77,7 +77,7 @@ function ListCards(props) {
         ) : null}
       </Title>
       <Section className="container-product">
-        {setIsLoading && <Spinner />}
+        {isLoading && <Spinner />}
         {productList.map((product, index) => (
           // ¡Ojo Lleva return implícito y no necesita llaves al ser una sola linea!
           <Card
