@@ -37,10 +37,6 @@ function Header () {
     logout()
     navigate('/')
   }
-
-  // useEffect(() => {
-  //   if (!isLogin) navigate('/')
-  // }, [isLogin])
   
   const iconMenu = isOpen ? <MdClose /> : <MdMenu />
   // const loginButton = <li><Link to='/login' className='menu-item'>Login</Link></li>

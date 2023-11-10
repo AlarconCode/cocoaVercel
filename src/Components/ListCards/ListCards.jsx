@@ -7,16 +7,19 @@ import Swal from "sweetalert2";
 import { string } from "prop-types";
 import { Card } from "../Card/Card";
 import styled from "styled-components";
+import { Spinner } from "../Spinner/Spinner";
 
 function ListCards(props) {
   // Logic ListCards
   const category = props.category;
+  const [isLoading, setIsLoading] = useState(false)
   const [productList, setProductList] = useState([]);
   const { getProducts, deleteProduct } = useProduct();
   const { isLogin } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true)
     const products = async () => {
       const data = await getProducts(category);
       setProductList(data);
@@ -74,6 +77,7 @@ function ListCards(props) {
         ) : null}
       </Title>
       <Section className="container-product">
+        {setIsLoading && <Spinner />}
         {productList.map((product, index) => (
           // ¡Ojo Lleva return implícito y no necesita llaves al ser una sola linea!
           <Card
