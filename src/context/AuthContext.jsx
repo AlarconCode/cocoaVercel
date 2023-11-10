@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { loginRequest, registerRequest, logoutRequest } from "../services/user.services";
 import { setToken } from "../services/product.services";
+import { node } from "prop-types";
 
 export const AuthContext = createContext()
 
@@ -106,4 +107,8 @@ export const AuthProvider = ({children}) => {
     </AuthContext.Provider>
   )
 
+}
+
+AuthProvider.propTypes ={
+  children: node
 }
