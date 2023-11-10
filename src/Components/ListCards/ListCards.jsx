@@ -23,6 +23,7 @@ function ListCards(props) {
     const products = async () => {
       const data = await getProducts(category);
       setProductList(data);
+      setIsLoading(false)
     };
     products();
   }, [category, getProducts]);
@@ -76,8 +77,8 @@ function ListCards(props) {
           </i>
         ) : null}
       </Title>
+      {isLoading && <Spinner />}
       <Section className="container-product">
-        {isLoading && <Spinner />}
         {productList.map((product, index) => (
           // ¡Ojo Lleva return implícito y no necesita llaves al ser una sola linea!
           <Card
