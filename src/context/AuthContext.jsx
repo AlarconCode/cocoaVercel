@@ -63,15 +63,15 @@ export const AuthProvider = ({children}) => {
     }
   }
 
+  const loggedUserJSON = window.localStorage.getItem('loggedUser')
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedUser')
     if (loggedUserJSON) {
       const userLogged = JSON.parse(loggedUserJSON)
       setUser(userLogged.user)
       setToken(userLogged.token)
       setIsLogin(true)
     }
-  }, [])
+  }, [loggedUserJSON])
   
   
   const logout = async () => {
