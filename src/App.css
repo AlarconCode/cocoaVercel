@@ -10,6 +10,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: 'Lato', sans-serif;
+  background-color: var(--third);
 }
 
 /* header start */
