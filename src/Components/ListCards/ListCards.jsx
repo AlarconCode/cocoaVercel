@@ -77,7 +77,7 @@ function ListCards(props) {
           </i>
         ) : null}
       </Title>
-      <Section className="container-product">
+      <Section $primary={isLoading}>
       {isLoading && <Spinner />}
         {productList.map((product, index) => (
           // ¡Ojo Lleva return implícito y no necesita llaves al ser una sola linea!
@@ -131,7 +131,8 @@ const Title = styled.div`
 
 const Section = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: ${props => props.$primary ? null : "repeat(auto-fill, minmax(320px, 1fr))" };
+  place-content: ${props => props.$primary ? "center" : null};
   gap: 2rem;
 `;
 

@@ -2,7 +2,11 @@
 import styles from './spinner.module.css'
 
 export const Spinner = () => {
-  return <span className={styles.loader} />
+  return (
+    <div className={styles.wrapper}>
+      <span className={styles.loader} />
+    </div>
+  )
 }
 
 {/* // const Span = styled.span`
