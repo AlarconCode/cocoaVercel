@@ -131,7 +131,7 @@ const Title = styled.div`
 
 const Section = styled.section`
   display: grid;
-  grid-template-columns: ${props => props.$primary ? null : "repeat(auto-fill, minmax(320px, 1fr))" };
+  grid-template-columns: ${props => props.$primary ? null : "repeat(auto-fill, minmax(200px, 1fr))" };
   place-content: ${props => props.$primary ? "center" : null};
   gap: 2rem;
 `;

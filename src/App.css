@@ -376,32 +376,6 @@ input, select {
 /* CSS Forms Register and Product #######END##### */
 
 
-/* HomePage START */
-
-.homepage-container {
-  width: 100vw;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
-  background-color: var(--third);
-  padding: 100px 2rem 100px 2rem ;
-  gap: 1rem;
-}
-
-.homepage-link {
-  text-decoration: none;
-  cursor: pointer;
-  color: var(--primary);
-  padding: 1rem;
-  text-align: center;
-  min-height: 100%;
-}
-
-
-/* HomePage END */
-
-
 /* Footer START */
 
 footer {

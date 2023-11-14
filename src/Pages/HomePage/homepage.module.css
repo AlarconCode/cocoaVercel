@@ -1,0 +1,35 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  background-color: var(--third);
+  padding: 100px 2rem 100px 2rem ;
+  gap: 1rem;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--primary);
+  padding: 1rem;
+  text-align: center;
+  min-height: 100%;
+  background-color: var(--secondary);
+  border-radius: 1rem;
+  border: 4px dotted var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+
+}
+
+.link img {
+  width: 30%;
+}
+
+.link h1 {
+  
+}
