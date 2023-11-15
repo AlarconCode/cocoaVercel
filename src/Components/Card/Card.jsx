@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { func, number, shape, string } from 'prop-types'
+import { func, number, shape, string } from "prop-types";
 import {
   FaPenToSquare as ModifyIcon,
   FaRegTrashCan as DeleteIcon,
 } from "react-icons/fa6";
 import logoCocoa from "../../assets/icons/taza-cocoa-marron.svg";
-import styled from "styled-components"
+import cafeTime from '../../assets/img/Dibujo-Granos-CafeTime.svg'
+import styled from "styled-components";
 
-export const Card = ({product, index, deleteCard}) => {
+export const Card = ({ product, index, deleteCard }) => {
   // Logic Card
-  const {_id, desc, ingredientes, price, img} = product
+  const { _id, desc, ingredientes, price, img } = product;
   const { isLogin } = useAuth();
   const [flippedState, setFlippedState] = useState({});
 
@@ -24,149 +25,152 @@ export const Card = ({product, index, deleteCard}) => {
 
   // JSX Card
   return (
-    <>
-      <DivCard
-        key={_id}
-        className={`card ${flippedState[index] ? "flipped" : ""}`}
-        onClick={() => handleClickFlipped(index)}
-      >
-        <div className="card-product front">
-          <div className="description-product">
-            <h3>{desc}</h3>
-            <p>{ingredientes}</p>
-            <h2 className="price">{price}</h2>
+    <Wrapper>
+      <div className="container">
+        <div className="card">
+          <div
+            className={`cardBack ${flippedState[index] ? "flipped" : ""}`}
+            onClick={() => handleClickFlipped(index)}
+          >
+            {img ? (
+              <img alt={desc} src={img} className="img-product" />
+            ) : (
+              <img alt={desc} src={logoCocoa} className="logoCocoa" />
+            )}
           </div>
-          <IconsAdmin $isLogin={isLogin}>
-            <Link
-              to={`/actualizar-producto/${_id}`}
-              style={{ color: "#7FABC2" }}
-            >
-              <ModifyIcon />
-            </Link>
-            <Link
-              style={{ color: "#7FABC2" }}
-              onClick={deleteCard}
-            >
-              <DeleteIcon />
-            </Link>
-          </IconsAdmin>
+          <div
+            className={`cardFront ${flippedState[index] ? "flipped" : ""}`}
+            onClick={() => handleClickFlipped(index)}
+          >
+            <div className="contentFront">
+              {/* <img alt={desc} src={cocoa} className="cocoaName" /> */}
+              <h3>{desc}</h3>
+              <p>{ingredientes}</p>
+              <h2 className="price">{price}</h2>
+            </div>
+          </div>
         </div>
-        <div className="card-product back">
-          {img ? (
-            <img
-              alt={desc}
-              src={img}
-              className="img-product"
-            />
-          ) : (
-            <img
-              alt={desc}
-              src={logoCocoa}
-              className="logoCocoa"
-            />
-          )}
-        </div>
-      </DivCard>
-    </>
-  )
-}
+            <IconsAdmin $isLogin={isLogin}>
+              <Link
+                to={`/actualizar-producto/${_id}`}
+                style={{ color: "#7FABC2" }}
+              >
+                <ModifyIcon />
+              </Link>
+              <Link style={{ color: "#7FABC2" }} onClick={deleteCard}>
+                <DeleteIcon />
+              </Link>
+            </IconsAdmin>
+      </div>
+    </Wrapper>
+  );
+};
 
-const DivCard = styled.div`
-    min-height: 150px;
-    position: relative;
-    perspective: 1000px;
-    transform-style: preserve-3d;
+const Wrapper = styled.div`
+  
+  .container {
+    padding: 1rem;
     display: flex;
-    justify-content: stretch;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
 
-    .card-product {
-      background-color: var(--secondary);
-      border: 4px dotted var(--primary);
-      border-radius: 1rem;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+  .card {
+    margin-top: 0rem;
+    height: 250px;
+    width: 250px;
+    position: relative;
+    border-radius: 0.25rem;
+  }
 
-    .front {
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-    }
+  .cardFront,
+  .cardBack {
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    height: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    transition: transform 0.5s ease;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 
-    .back {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      right: 0;
-      backface-visibility: hidden;
-      transition: transform 0.6s;
-    }
+  .cardBack {
+    transform: perspective(1000px) rotateY(180deg);
+    background-color: var(--secondary);
+    overflow: hidden;
+  }
 
-    .card .back {
-      transform: rotateY(180deg);
-    }
+  .cardBack.flipped {
+    transform: perspective(1000px) rotateY(0deg);
+  }
 
-    .card.flipped .front {
-      transform: rotateY(180deg);
-    }
+  .cardFront {
+    transform: perspective(1000px) rotateY(0deg);
+    background-color: var(--secondary);
+    padding: 1.5rem;
+  }
 
-    .logoCocoa {
-      opacity: .5;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
+  .cardFront.flipped {
+    transform: perspective(1000px) rotateY(-180deg);
+  }
 
-    .card.flipped .back {
-      transform: rotateY(360deg);
-    }
+  .contentFront {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    row-gap: 1rem;
 
-    .back {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .img-product {
-      width: 100%;
-      height: 100%;
-      border-radius: 1rem;
-      object-fit: cover;
-    }
-
-    .description-product {
-      padding: 1rem;
-    }
-
-    .description-product h3 {
-      text-align: left;
-      font-weight: 500;
+    h3 {
       font-size: 1.3rem;
     }
 
-    .price {
-      margin-top: 1rem;
-      font-size: 1.4rem;
-      text-align: right;
+    .cocoaName {
+      width: 100px;
+      border-radius: .5rem;
+      background-color: var(--primary);
+      padding: 1rem;
     }
 
-`
+    .price {
+      font-size: 1.5rem;
+      font-weight: bolder;
+      align-self: self-end;
+    }
+
+  }
+
+  .logoCocoa {
+    opacity: 0.2;
+    object-fit: cover;
+    width: 130%;
+    height: 135%;
+  }
+
+  .img-product {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem;
+    object-fit: cover;
+  }
+`;
 
 const IconsAdmin = styled.div`
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 48px;
-    background-color: var(--primary);
-    border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    padding: 1.3rem;
-    font-size: 1.3rem;
-    display: ${props => props.$isLogin ? 'flex' : 'none'};
-` 
+  display: ${(props) => (props.$isLogin ? "flex" : "none")};
+  justify-content: space-between;
+  align-items: center;
+  width: 220px;
+  height: 48px;
+  background-color: var(--primary);
+  border-bottom-right-radius: .5rem;
+  border-bottom-left-radius: 0.5rem;
+  padding: 1.3rem;
+  font-size: 1.3rem;
+`;
 
 Card.propTypes = {
   product: shape({
@@ -174,8 +178,8 @@ Card.propTypes = {
     desc: string,
     ingredientes: string,
     price: string,
-    img: string
+    img: string,
   }),
   index: number,
-  deleteCard: func
-}
+  deleteCard: func,
+};
