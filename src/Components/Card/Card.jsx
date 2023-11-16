@@ -7,7 +7,6 @@ import {
   FaRegTrashCan as DeleteIcon,
 } from "react-icons/fa6";
 import logoCocoa from "../../assets/icons/taza-cocoa-marron.svg";
-import cafeTime from '../../assets/img/Dibujo-Granos-CafeTime.svg'
 import styled from "styled-components";
 
 export const Card = ({ product, index, deleteCard }) => {
@@ -45,8 +44,8 @@ export const Card = ({ product, index, deleteCard }) => {
             <div className="contentFront">
               {/* <img alt={desc} src={cocoa} className="cocoaName" /> */}
               <h3>{desc}</h3>
-              <p>{ingredientes}</p>
-              <h2 className="price">{price}</h2>
+              <p className="ingredientes">{ingredientes}</p>
+              <p className="price">{price}</p>
             </div>
           </div>
         </div>
@@ -79,7 +78,7 @@ const Wrapper = styled.div`
   .card {
     margin-top: 0rem;
     height: 250px;
-    width: 250px;
+    width: 100%;
     position: relative;
     border-radius: 0.25rem;
   }
@@ -88,7 +87,7 @@ const Wrapper = styled.div`
   .cardBack {
     box-sizing: border-box;
     border-radius: 0.25rem;
-    height: 100%;
+    height: 250px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -1px rgba(0, 0, 0, 0.06);
     width: 100%;
@@ -111,7 +110,7 @@ const Wrapper = styled.div`
   .cardFront {
     transform: perspective(1000px) rotateY(0deg);
     background-color: var(--secondary);
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .cardFront.flipped {
@@ -119,6 +118,7 @@ const Wrapper = styled.div`
   }
 
   .contentFront {
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -127,6 +127,10 @@ const Wrapper = styled.div`
 
     h3 {
       font-size: 1.3rem;
+    }
+
+    .ingredientes {
+      font-size: 1.2rem;
     }
 
     .cocoaName {
