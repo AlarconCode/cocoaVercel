@@ -73,6 +73,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin: auto;
+    z-index: 0;
   }
 
   .card {
