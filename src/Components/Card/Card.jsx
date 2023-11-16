@@ -75,27 +75,29 @@ const Wrapper = styled.div`
     margin: auto;
     z-index: 0;
   }
-
+  
   .card {
     margin-top: 0rem;
     height: 250px;
     width: 100%;
     position: relative;
     border-radius: 0.25rem;
+    z-index: 0;
   }
-
+  
   .cardFront,
   .cardBack {
     box-sizing: border-box;
     border-radius: 0.25rem;
     height: 250px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
     width: 100%;
     transition: transform 0.5s ease;
     position: absolute;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    z-index: 0;
   }
 
   .cardBack {
