@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProduct } from "../../context/ProductContext";
 import Swal from "sweetalert2";
+import {StyledForm, StyledInput } from '../LoginForm/LoginForm'
+import { string } from "prop-types";
 
 
 // Formulario con Componentes Formik Contexto
@@ -131,14 +133,13 @@ export const ProductForm = ({...props}) => {
         // console.log('formikProps', formik)
         console.log('value file', formik.values)
         return (
-          <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+          <StyledForm onSubmit={formik.handleSubmit} encType="multipart/form-data">
           <h1 className="titleRegisterForm">{props.title}</h1>
           {
             error ? <div className="errorMessage">{error}</div> : null
           }
           <div className="form-control">
-            <label htmlFor="cat">Categoría</label>
-            <Field as='select' name='cat' type='text'>
+            <Field as='select' name='cat' type='text' >
               <option value="Desayunos">Desayunos</option>
               <option value="cafes">Cafes</option>
               <option value="Repostería Casera">Repostería Casera</option>
@@ -148,18 +149,15 @@ export const ProductForm = ({...props}) => {
             <ErrorMessage name="cat" component='span' />
           </div>
           <div className="form-control">
-            <label htmlFor="desc">Descripción</label>
-            <Field name='desc' type='text' />
+            <StyledInput name='desc' type='text' placeholder='Descripción' />
             <ErrorMessage name="desc" component='span' />
           </div>
           <div className="form-control">
-            <label htmlFor="ingredientes">Ingredientes</label>
-            <Field name='ingredientes' type='text' />
+            <StyledInput name='ingredientes' type='text' placeholder='Ingredientes' />
             <ErrorMessage name="ingredientes" component='span' />
           </div>
           <div className="form-control">
-            <label htmlFor="price">Precio</label>
-            <Field name='price' type='text' />
+            <StyledInput name='price' type='text' placeholder='Precio' />
             <ErrorMessage name="price" component='span' />
           </div>
           <div className="form-control">
@@ -167,7 +165,6 @@ export const ProductForm = ({...props}) => {
             {/* <Field name='img' type='file'/> */}
             <input type="file" name='img' onChange={(e) => formik.setFieldValue('img', e.target.files[0])}/>
             <ErrorMessage name="img" component='span'/>
-            {/* <FileUpload name="img" fileRef={fileRef} /> */}
           </div> 
           <button 
             type="submit" 
@@ -176,11 +173,14 @@ export const ProductForm = ({...props}) => {
             className="buttonForm">
               Guardar
           </button>
-      </form>
+      </StyledForm>
         )
       }}
     </Formik> 
   )
 
+}
 
+ProductForm.propTypes = {
+  title: string
 }

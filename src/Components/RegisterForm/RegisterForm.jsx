@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
+import {StyledForm, StyledInput} from '../LoginForm/LoginForm'
 
 const initialValues = {
   name: '',
@@ -28,7 +29,7 @@ export const RegisterForm = () => {
 
   useEffect(() => {
     if (isLogin) navigate('/')
-  }, [isLogin])  
+  }, [isLogin, navigate])  
   
   const onSubmit = async (values, onSubmitProps) => {
     await register(values)
@@ -42,39 +43,34 @@ export const RegisterForm = () => {
       onSubmit={onSubmit}
     >
       {formik => (
-        <form onSubmit={formik.handleSubmit}>
+        <StyledForm onSubmit={formik.handleSubmit}>
           <h1 className="titleRegisterForm">Registro</h1>
           {
             error ? <div className="errorMessage">{error}</div> : null
           }
           <div className="form-control">
-            <label htmlFor="name">Nombre</label>
-            <Field name='name' type='text'/>
+            <StyledInput name='name' type='text' placeholder='Nombre'/>
             <ErrorMessage name="name" component='span' />
           </div>
           <div className="form-control">
-            <label htmlFor="surname">Apellidos</label>
-            <Field name='surname' type='text' />
+            <StyledInput name='surname' type='text' placeholder='Apellidos'/>
             <ErrorMessage name="surname" component='span' />
           </div>
           <div className="form-control">
-            <label htmlFor="email">Email</label>
-            <Field name='email' type='email' />
+            <StyledInput name='email' type='email' placeholder='Email' />
             <ErrorMessage name="email" component='span' />
           </div>
           <div className="form-control">
-            <label htmlFor="password">Password</label>
-            <Field name='password' type='password' />
+            <StyledInput name='password' type='password' placeholder='password' />
             <ErrorMessage name="password" component='span' />
           </div>
           <div className="form-control">
-            <label htmlFor="img"></label>
-            <Field name='img' type='file' />
+            <Field name='img' type='file'/>
             <ErrorMessage name="img" component='span' />
           </div>
           <button type="submit" className="buttonForm">Enviar</button>
           <button type='button' className="buttonForm" onClick={()=>{navigate(-1)}}> Atrás</button>
-      </form>
+      </StyledForm>
       )}
     </Formik> 
   )

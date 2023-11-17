@@ -12,7 +12,7 @@ import { RegisterPage } from "./Pages/Register/RegisterPage";
 
 
 function App() {
-
+  
   return (
     <AuthProvider>
       <ProductProvider>
