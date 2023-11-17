@@ -95,18 +95,22 @@ const Wrapper = styled.div`
     position: absolute;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
+  
   .cardBack {
     transform: perspective(1000px) rotateY(180deg);
     background-color: var(--secondary);
     overflow: hidden;
+    padding: 1rem;
   }
-
+  
   .cardBack.flipped {
     transform: perspective(1000px) rotateY(0deg);
   }
-
+  
   .cardFront {
     transform: perspective(1000px) rotateY(0deg);
     background-color: var(--secondary);
@@ -156,7 +160,7 @@ const Wrapper = styled.div`
   }
 
   .img-product {
-    width: 100%;
+    width: auto;
     height: 100%;
     border-radius: 0.25rem;
     object-fit: cover;
