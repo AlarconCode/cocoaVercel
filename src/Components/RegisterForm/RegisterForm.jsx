@@ -69,7 +69,6 @@ export const RegisterForm = () => {
             <ErrorMessage name="img" component='span' />
           </div>
           <button type="submit" className="buttonForm">Enviar</button>
-          <button type='button' className="buttonForm" onClick={()=>{navigate(-1)}}> Atrás</button>
       </StyledForm>
       )}
     </Formik> 
