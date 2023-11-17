@@ -9,12 +9,13 @@
 }
 
 .link {
-  width: 250px;
-  height: 150px;
+  background-color: red;
+  width: 100vw;
+  height: 250px;
   text-decoration: none;
   cursor: pointer;
   color: var(--primary);
-  padding: 1rem;
+  padding: 1.5rem;
   text-align: center;
   background-color: var(--secondary);
   border-radius: .5rem;
@@ -25,7 +26,12 @@
   row-gap: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
   0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: opacity 300ms ease;
 
+}
+
+.link:hover {
+  opacity: .7;
 }
 
 .link img {

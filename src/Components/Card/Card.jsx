@@ -66,9 +66,8 @@ export const Card = ({ product, index, deleteCard }) => {
 };
 
 const Wrapper = styled.div`
-  
+
   .container {
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -168,13 +167,13 @@ const IconsAdmin = styled.div`
   display: ${(props) => (props.$isLogin ? "flex" : "none")};
   justify-content: space-between;
   align-items: center;
-  width: 220px;
-  height: 48px;
+  width: 85%;
+  height: 30px;
   background-color: var(--primary);
   border-bottom-right-radius: .5rem;
   border-bottom-left-radius: 0.5rem;
-  padding: 1.3rem;
-  font-size: 1.3rem;
+  padding: 1.2rem;
+  font-size: 1.2rem;
 `;
 
 Card.propTypes = {
