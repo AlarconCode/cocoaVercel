@@ -73,7 +73,6 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin: auto;
-    z-index: 0;
   }
   
   .card {
@@ -82,7 +81,7 @@ const Wrapper = styled.div`
     width: 100%;
     position: relative;
     border-radius: 0.25rem;
-    z-index: 0;
+    transform: perspective(1000px) rotateY(0);//Esta linea es necesaria para que safari respete los z-index al aplicar transform. https://stackoverflow.com/questions/22621544/webkit-transform-breaks-z-index-on-safari
   }
   
   .cardFront,
@@ -97,7 +96,6 @@ const Wrapper = styled.div`
     position: absolute;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    z-index: 0;
   }
 
   .cardBack {
@@ -113,7 +111,7 @@ const Wrapper = styled.div`
   .cardFront {
     transform: perspective(1000px) rotateY(0deg);
     background-color: var(--secondary);
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .cardFront.flipped {

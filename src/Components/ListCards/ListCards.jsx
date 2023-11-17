@@ -105,6 +105,7 @@ const Wrapper = styled.section`
   background-color: var(--third);
   padding: 2rem 2rem 8rem 2rem;
   color: var(--primary);
+  z-index: 1;
 
 `
 
