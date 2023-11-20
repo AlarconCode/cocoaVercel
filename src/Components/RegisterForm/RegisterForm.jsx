@@ -7,7 +7,6 @@ import {StyledForm, StyledInput} from '../LoginForm/LoginForm'
 
 const initialValues = {
   name: '',
-  surname: '',
   email: '',
   password: '',
   img: ''
@@ -15,7 +14,6 @@ const initialValues = {
 
 const validationSchema = Yup.object({
   name: Yup.string().min(3,'Debe tener mas de 3 caracteres').required('Campo requerido'),
-  surname: Yup.string().min(3,'Debe tener mas de 3 caracteres'),
   email: Yup.string().email('Introduce un email válido').required('Campo requerido'),
   password: Yup.string().min(8,'Debe tener 8 o más caracteres').required('Campo requerido')
 })
@@ -51,10 +49,6 @@ export const RegisterForm = () => {
           <div className="form-control">
             <StyledInput name='name' type='text' placeholder='Nombre'/>
             <ErrorMessage name="name" component='span' />
-          </div>
-          <div className="form-control">
-            <StyledInput name='surname' type='text' placeholder='Apellidos'/>
-            <ErrorMessage name="surname" component='span' />
           </div>
           <div className="form-control">
             <StyledInput name='email' type='email' placeholder='Email' />
