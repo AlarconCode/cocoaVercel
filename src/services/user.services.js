@@ -1,3 +1,4 @@
+import { setToken } from "./product.services";
 const url = import.meta.env.VITE_BASE_URL
 console.log(url);
 
@@ -26,7 +27,7 @@ export const registerRequest = async (user) => {
 export const loginRequest = async (user) => {
   const options = {
     method: 'POST',
-    // credentials: 'include',
+    credentials: 'include',
     body: JSON.stringify(user),
     headers: {'Content-Type': 'application/json'}
   }
@@ -47,14 +48,12 @@ export const loginRequest = async (user) => {
 
 export const logoutRequest = async () => {
 
-  const loggedUserJSON = window.localStorage.getItem('loggedUser')
-  const userLogged = JSON.parse(loggedUserJSON) 
   
   const options = {
     method: 'POST',
-    // credentials: 'include',
+    credentials: 'include',
     headers: { 
-      'Authorization': userLogged.token,
+      'Authorization': setToken,
       'Content-Type': 'application/json'
     }
   }

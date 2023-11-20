@@ -15,7 +15,14 @@ const initialValues = {
 const validationSchema = Yup.object({
   name: Yup.string().min(3,'Debe tener mas de 3 caracteres').required('Campo requerido'),
   email: Yup.string().email('Introduce un email válido').required('Campo requerido'),
-  password: Yup.string().min(8,'Debe tener 8 o más caracteres').required('Campo requerido')
+  password: Yup.string()
+  .min(8, 'Password must be 8 characters long')
+  .matches(/[0-9]/, 'Password requires a number')
+  .matches(/[a-z]/, 'Password requires a lowercase letter')
+  .matches(/[A-Z]/, 'Password requires an uppercase letter')
+  .matches(/[^\w]/, 'Password requires a symbol')
+  .matches(/^\S*$/, 'Whitespace is not allowed')
+  .required()
 })
 
 

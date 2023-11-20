@@ -1,7 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { loginRequest, registerRequest, logoutRequest } from "../services/user.services";
 import { setToken } from "../services/product.services";
 import { node } from "prop-types";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+
 
 export const AuthContext = createContext()
 
@@ -18,6 +21,8 @@ export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null)
   const [isLogin, setIsLogin] = useState(false)
   const [error, setError] =  useState('')
+  const [cookies] = useCookies()
+  const navigate = useNavigate()
 
   const register = async (user) => {
     try {
@@ -41,18 +46,18 @@ export const AuthProvider = ({children}) => {
   }
 
   const login = async (values) => {
+    
+    if (cookies.jwt) {
+      navigate('/')
+    }
+
     try {
       
       const res = await loginRequest(values)
       if (!res.error) {
-        
-        window.localStorage.setItem(
-          'loggedUser', JSON.stringify(res)
-        )
         setUser(res.user)
-        setToken(res.token)
         setIsLogin(true)
-      
+        setToken(cookies.jwt)
       } else {
       
         setError(res.message)
@@ -64,16 +69,6 @@ export const AuthProvider = ({children}) => {
       console.log(error);
     }
   }
-
-  const loggedUserJSON = window.localStorage.getItem('loggedUser')
-  useEffect(() => {
-    if (loggedUserJSON) {
-      const userLogged = JSON.parse(loggedUserJSON)
-      setUser(userLogged.user)
-      setToken(userLogged.token)
-      setIsLogin(true)
-    }
-  }, [loggedUserJSON])
   
   
   const logout = async () => {
@@ -85,7 +80,6 @@ export const AuthProvider = ({children}) => {
       setUser(null)
       setToken(null)
       setIsLogin(false)
-      window.localStorage.clear()
 
     } catch (error) {
       console.log(error);  
@@ -101,6 +95,7 @@ export const AuthProvider = ({children}) => {
         logout,
         user,
         isLogin,
+        setIsLogin,
         error
       }}
     >
