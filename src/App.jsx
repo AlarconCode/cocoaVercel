@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Header from './Components/Header/Header'
 import ListCards from "./Components/ListCards/ListCards";
@@ -12,11 +12,11 @@ import { RegisterPage } from "./Pages/Register/RegisterPage";
 
 
 function App() {
-  
+  const location = useLocation()
+
   return (
     <AuthProvider>
       <ProductProvider>
-        <BrowserRouter>
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -30,8 +30,7 @@ function App() {
             <Route path="registro" element={<RegisterPage />} />
             <Route path="login" element={<LoginPage />} />
           </Routes>
-          <Footer />
-        </BrowserRouter>
+          {location.pathname !== '/login' && location.pathname !== '/registro'  && <Footer />}
       </ProductProvider>
     </AuthProvider>
   )
