@@ -1,7 +1,6 @@
-const url = import.meta.env.VITE_BASE_URL
+import {token} from './user.services'
 
-export let token = null
-export const setToken = newToken => {token = `Bearer ${newToken}` }
+const url = import.meta.env.VITE_BASE_URL
 
 export const getProductRequest = async (id) => {
 

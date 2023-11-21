@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import { loginRequest, registerRequest, logoutRequest } from "../services/user.services";
-import { setToken } from "../services/product.services";
 import { node } from "prop-types";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
@@ -57,7 +56,6 @@ export const AuthProvider = ({children}) => {
       if (!res.error) {
         setUser(res.user)
         setIsLogin(true)
-        setToken(cookies.jwt)
       } else {
       
         setError(res.message)
@@ -78,7 +76,6 @@ export const AuthProvider = ({children}) => {
       const res = await logoutRequest()
       console.log(res);
       setUser(null)
-      setToken(null)
       setIsLogin(false)
 
     } catch (error) {
