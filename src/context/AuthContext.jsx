@@ -19,7 +19,7 @@ export const useAuth = () => {
 export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null)
   const [isLogin, setIsLogin] = useState(false)
-  const [error, setError] =  useState('')
+  const [error, setError] =  useState([])
   const [cookies] = useCookies()
   const navigate = useNavigate()
 
@@ -93,7 +93,8 @@ export const AuthProvider = ({children}) => {
         user,
         isLogin,
         setIsLogin,
-        error
+        error,
+        setError
       }}
     >
       {children}

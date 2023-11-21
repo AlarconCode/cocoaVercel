@@ -8,7 +8,6 @@ function getCookie(name) {
  }
  
 export const token = `Bearer ${getCookie('jwt')}`
-console.log(token);
 
 export const registerRequest = async (user) => {
   const options = {

@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
+import { node } from "prop-types";
 import {
   getProductsRequest,
   getProductRequest,
@@ -11,6 +12,7 @@ import { useAuth } from "./AuthContext";
 
 export const ProductContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useProduct = () => {
   const context = useContext(ProductContext);
   if (!context) {
@@ -41,6 +43,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const createProduct = async (product) => {
+    console.log(product);
     try {
       const res = await createProductRequest(product);
       if ( res && res.message === "jwt expired") {
@@ -48,7 +51,7 @@ export const ProductProvider = ({ children }) => {
       }
       console.log(res);
     } catch (error) {
-      console.log(error);
+      console.log('el error', error);
     }
   };
 
@@ -94,3 +97,7 @@ export const ProductProvider = ({ children }) => {
     </ProductContext.Provider>
   );
 };
+
+ProductProvider.propTypes ={
+  children: node
+}

@@ -35,6 +35,7 @@ export const createProductRequest = async (product) => {
   const options = {
     method: 'POST',
     body: product,
+    credentials: 'include',
     headers: { 
       'Authorization': token
     }
@@ -44,6 +45,7 @@ export const createProductRequest = async (product) => {
     
     const res = await fetch(`${url}product`, options)
     const data = await res.json()
+    console.log(data);
     return data
 
   } catch (error) {
@@ -57,6 +59,7 @@ export const updateProductRequest = async (product) => {
   const options = {
     method: 'PUT',
     body: product,
+    credentials: 'include',
     headers: { 
       'Authorization': token
     }

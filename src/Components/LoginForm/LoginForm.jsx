@@ -16,18 +16,30 @@ const validationSchema = Yup.object({
     .email("Introduce un email válido")
     .required("Campo requerido"),
   password: Yup.string()
-    .min(8, "Debe tener 8 o más caracteres")
+    .min(8, "La contraseña debe tener 8 caracteres")
+    .matches(/[0-9]/, "El Password requiere a número")
+    .matches(/[a-z]/, "El Password requiere una minúscula")
+    .matches(/[A-Z]/, "El Password requiere una mayúscula")
+    .matches(/[^\w]/, "El Password requiere un symbol")
+    .matches(/^\S*$/, "No se permiten espacios en blanco")
     .required("Campo requerido"),
 });
 
 // Formulario con Componentes Formik Contexto
 export const LoginForm = () => {
-  const { login, isLogin, error } = useAuth();
+  const { login, isLogin, error, setError } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLogin) navigate("/");
   }, [isLogin, navigate]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setError([]);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, [error, setError]);
 
   const onSubmit = async (values) => {
     try {
@@ -46,13 +58,23 @@ export const LoginForm = () => {
       {(formik) => (
         <StyledForm onSubmit={formik.handleSubmit}>
           <h1 className="titleRegisterForm">Login</h1>
-          {error ? <div className="errorMessage">{error}</div> : null}
+          {error
+            ? error.map((message, index) => (
+                <div key={index} className="errorMessage">
+                  {message}
+                </div>
+              ))
+            : null}
           <div className="form-control">
             <StyledInput name="email" type="email" placeholder="Email" />
             <ErrorMessage name="email" component="span" />
           </div>
           <div className="form-control">
-            <StyledInput name="password" type="password" placeholder="Password" />
+            <StyledInput
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
             <ErrorMessage name="password" component="span" />
           </div>
           <button type="submit" className="buttonForm">
@@ -73,7 +95,7 @@ export const StyledForm = styled.form`
   height: 100vh;
   display: grid;
   place-content: center;
-  row-gap: .5rem;
+  row-gap: 0.5rem;
 
   .form-control {
     width: 75vw;

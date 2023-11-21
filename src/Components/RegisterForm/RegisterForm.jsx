@@ -16,13 +16,13 @@ const validationSchema = Yup.object({
   name: Yup.string().min(3,'Debe tener mas de 3 caracteres').required('Campo requerido'),
   email: Yup.string().email('Introduce un email válido').required('Campo requerido'),
   password: Yup.string()
-  .min(8, 'Password must be 8 characters long')
-  .matches(/[0-9]/, 'Password requires a number')
-  .matches(/[a-z]/, 'Password requires a lowercase letter')
-  .matches(/[A-Z]/, 'Password requires an uppercase letter')
-  .matches(/[^\w]/, 'Password requires a symbol')
-  .matches(/^\S*$/, 'Whitespace is not allowed')
-  .required()
+    .min(8, 'La contraseña debe tener 8 caracteres')
+    .matches(/[0-9]/, 'El Password requiere a número')
+    .matches(/[a-z]/, 'El Password requiere una minúscula')
+    .matches(/[A-Z]/, 'El Password requiere una mayúscula')
+    .matches(/[^\w]/, 'El Password requiere un symbol')
+    .matches(/^\S*$/, 'No se permiten espacios en blanco')
+    .required('Campo requerido')
 })
 
 
