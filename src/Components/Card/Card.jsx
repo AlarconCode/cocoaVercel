@@ -185,7 +185,7 @@ Card.propTypes = {
     _id: string,
     desc: string,
     ingredientes: string,
-    price: string,
+    price: number,
     img: string,
   }),
   index: number,

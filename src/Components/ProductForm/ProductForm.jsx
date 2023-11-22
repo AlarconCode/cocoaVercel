@@ -31,12 +31,12 @@ export const ProductForm = ({ ...props }) => {
     price: Yup.string().required("precio requerido"),
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setError([]);
-    }, 10000);
-    return () => clearTimeout(timer);
-  }, [error, setError]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setError([]);
+  //   }, 10000);
+  //   return () => clearTimeout(timer);
+  // }, [error, setError]);
 
   const onSubmitCreateProduct = (values, onSubmitProps) => {
     const formData = new FormData();
@@ -129,6 +129,7 @@ export const ProductForm = ({ ...props }) => {
     >
       {(formik) => {
         // console.log('formikProps', formik)
+        console.log(formik.values);
         return (
           <StyledForm
             onSubmit={formik.handleSubmit}
