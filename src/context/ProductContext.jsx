@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { node } from "prop-types";
 import {
   getProductsRequest,
@@ -22,6 +22,7 @@ export const useProduct = () => {
 };
 
 export const ProductProvider = ({ children }) => {
+  const [errors, setErrors] =  useState([])
   const { logout } = useAuth();
 
   const getSingleProduct = async (id) => {
@@ -46,19 +47,22 @@ export const ProductProvider = ({ children }) => {
     console.log(product);
     try {
       const res = await createProductRequest(product);
-      if ( res && res.message === "jwt expired") {
-        logout();
+      if (res.error) {
+        setErrors(res.message)
+        console.log('error del back', res.message);
       }
-      console.log(res);
     } catch (error) {
-      console.log('el error', error);
+      console.log(error);
     }
   };
 
   const updateProduct = async (product) => {
     try {
       const res = await updateProductRequest(product);
-      console.log(res);
+      if (res.error) {
+        setErrors(res.message)
+        console.log('error del back', res.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +71,6 @@ export const ProductProvider = ({ children }) => {
   const deleteProduct = async (id) => {
     try {
       const res = await deleteProductRequest(id);
-      console.log(res);
       return res;
     } catch (error) {
       console.log(error);
@@ -91,6 +94,8 @@ export const ProductProvider = ({ children }) => {
         updateProduct,
         deleteProduct,
         uploadImg,
+        errors,
+        setErrors
       }}
     >
       {children}

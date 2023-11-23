@@ -10,9 +10,8 @@ import { string } from "prop-types";
 
 // Formulario con Componentes Formik Contexto
 export const ProductForm = ({ ...props }) => {
-  const { error, setError } = useAuth();
   const [values, setValues] = useState(null);
-  const { createProduct, getSingleProduct, updateProduct } = useProduct();
+  const {createProduct, getSingleProduct, updateProduct, errors } = useProduct();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -26,18 +25,13 @@ export const ProductForm = ({ ...props }) => {
 
   const validationSchema = Yup.object({
     cat: Yup.string().required("Campo requerido"),
-    desc: Yup.string().max(255, "Debe tener menos caracteres"),
-    ingredientes: Yup.string().max(255, "Debe tener menos caracteres"),
-    price: Yup.string().required("precio requerido"),
+    desc: Yup.string().max(120, "Debe tener menos caracteres"),
+    ingredientes: Yup.string().max(120, "Debe tener menos caracteres"),
+    
+    
   });
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setError([]);
-  //   }, 10000);
-  //   return () => clearTimeout(timer);
-  // }, [error, setError]);
-
+  
+ 
   const onSubmitCreateProduct = (values, onSubmitProps) => {
     const formData = new FormData();
     formData.append("cat", values.cat);
@@ -55,11 +49,14 @@ export const ProductForm = ({ ...props }) => {
       cancelButtonText: "Cancelar",
       cancelButtonColor: "red",
     }).then((res) => {
-      if (res.isConfirmed) {
+      if (errors && errors.length > 0) {
+        Swal.fire({ icon: "error", title: "Error", text: errors.join('\n') }); 
+        onSubmitProps.setSubmitting(false);
+      } else if (errors) {
         createProduct(formData);
         Swal.fire({
           icon: "success",
-          title: `${values.desc} Añadida`,
+          title: `${values.desc} Actualizada`,
           timer: 2000,
           showConfirmButton: false,
         });
@@ -91,16 +88,21 @@ export const ProductForm = ({ ...props }) => {
       cancelButtonText: "Cancelar",
       cancelButtonColor: "red",
     }).then((res) => {
-      if (res.isConfirmed) {
+      if (errors && errors.length > 0) {
+        updateProduct(formData);
+        console.log(errors.join('\n'));
+        Swal.fire({ icon: "error", title: "Error", text: errors.join('\n') }); 
+        onSubmitProps.setSubmitting(false);
+      } else if (errors) {
         updateProduct(formData);
         Swal.fire({
           icon: "success",
-          title: "¡Actualizado!",
+          title: `${values.desc} Actualizada`,
           timer: 2000,
           showConfirmButton: false,
         });
         setTimeout(() => {
-          navigate(-1);
+          navigate(`/${values.cat}`);
         }, 2000);
       }
       if (res.isDismissed) {
@@ -136,15 +138,9 @@ export const ProductForm = ({ ...props }) => {
             encType="multipart/form-data"
           >
             <h1 className="titleRegisterForm">{props.title}</h1>
-            {error
-              ? error.map((message, index) => (
-                  <div key={index} className="errorMessage">
-                    {message}
-                  </div>
-                ))
-              : null}
             <div className="form-control">
               <Field as="select" name="cat" type="text">
+                <option>Elige una categoría</option>
                 <option value="Desayunos">Desayunos</option>
                 <option value="cafes">Cafes</option>
                 <option value="Repostería Casera">Repostería Casera</option>
@@ -170,8 +166,6 @@ export const ProductForm = ({ ...props }) => {
               <ErrorMessage name="price" component="span" />
             </div>
             <div className="form-control">
-              <label htmlFor="img"></label>
-              {/* <Field name='img' type='file'/> */}
               <input
                 type="file"
                 name="img"

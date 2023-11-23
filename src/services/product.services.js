@@ -45,7 +45,6 @@ export const createProductRequest = async (product) => {
     
     const res = await fetch(`${url}product`, options)
     const data = await res.json()
-    console.log(data);
     return data
 
   } catch (error) {
@@ -68,9 +67,8 @@ export const updateProductRequest = async (product) => {
   try {
     
     const res = await fetch(`${url}product/${product.get('_id')}`, options)
-    // const data = await res.json()
-    // return data
-    return res
+    const data = await res.json()
+    return data
 
   } catch (error) {
     console.log(error);
