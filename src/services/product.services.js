@@ -60,7 +60,7 @@ export const updateProductRequest = async (product) => {
     body: product,
     credentials: 'include',
     headers: { 
-      'Authorization': token
+      'Authorization': ''
     }
   }
 

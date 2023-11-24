@@ -11,7 +11,7 @@ import { string } from "prop-types";
 // Formulario con Componentes Formik Contexto
 export const ProductForm = ({ ...props }) => {
   const [values, setValues] = useState(null);
-  const {createProduct, getSingleProduct, updateProduct, errors } = useProduct();
+  const {createProduct, getSingleProduct, updateProduct, errors, setErrors } = useProduct();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -49,11 +49,12 @@ export const ProductForm = ({ ...props }) => {
       cancelButtonText: "Cancelar",
       cancelButtonColor: "red",
     }).then((res) => {
-      if (errors && errors.length > 0) {
-        Swal.fire({ icon: "error", title: "Error", text: errors.join('\n') }); 
+      createProduct(formData);
+      if (errors && errors.length > 0 || errors[0] === "jwt must be provided") {
+        Swal.fire({ icon: "error", title: "Error", text: errors.join('\n') });
+        setErrors([]);
         onSubmitProps.setSubmitting(false);
-      } else if (errors) {
-        createProduct(formData);
+      } else if (errors.length === 0) {
         Swal.fire({
           icon: "success",
           title: `${values.desc} Actualizada`,
@@ -88,13 +89,13 @@ export const ProductForm = ({ ...props }) => {
       cancelButtonText: "Cancelar",
       cancelButtonColor: "red",
     }).then((res) => {
-      if (errors && errors.length > 0) {
-        updateProduct(formData);
+      updateProduct(formData);
+      if (errors && errors.length > 0 || errors[0] === "jwt must be provided") {
         console.log(errors.join('\n'));
-        Swal.fire({ icon: "error", title: "Error", text: errors.join('\n') }); 
+        Swal.fire({ icon: "error", title: "Error", text: errors.join('\n') });
+        setErrors([]);
         onSubmitProps.setSubmitting(false);
-      } else if (errors) {
-        updateProduct(formData);
+      } else if (errors.length === 0) {
         Swal.fire({
           icon: "success",
           title: `${values.desc} Actualizada`,
