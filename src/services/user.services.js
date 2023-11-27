@@ -1,13 +1,13 @@
 const url = import.meta.env.VITE_BASE_URL
 console.log(url);
 
-function getCookie(name) { 
+export function getCookie(name) { 
   const re = new RegExp(name + "=([^;]+)"); 
   const value = re.exec(document.cookie); 
   return (value != null) ? value[1] : null; 
  }
  
-export const token = `Bearer ${getCookie('jwt')}`
+const token = `Bearer ${getCookie('jwt')}`
 console.log('token', token);
 
 export const registerRequest = async (user) => {

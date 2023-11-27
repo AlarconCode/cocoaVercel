@@ -1,4 +1,5 @@
-import {token} from './user.services'
+import {getCookie} from './user.services'
+const token = `Bearer ${getCookie('jwt')}`
 
 const url = import.meta.env.VITE_BASE_URL
 
@@ -65,7 +66,7 @@ export const updateProductRequest = async (product) => {
   }
 
   try {
-    console.log(token);
+    console.log('updateToken', token);
     const res = await fetch(`${url}product/${product.get('_id')}`, options)
     const data = await res.json()
     return data
