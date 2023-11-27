@@ -38,7 +38,7 @@ export const createProductRequest = async (product) => {
     body: product,
     credentials: 'include',
     headers: { 
-      'Authorization': token
+      'x_authorization': token
     }
   }
 
@@ -61,7 +61,7 @@ export const updateProductRequest = async (product) => {
     body: product,
     credentials: 'include',
     headers: { 
-      'Authorization': token
+      'x_authorization': token
     }
   }
 
@@ -83,8 +83,8 @@ export const deleteProductRequest = async (id) => {
     method: 'DELETE',
     credentials: 'include',
     headers: { 
-      'Authorization': token,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x_authorization': token,
     }
   }
 
@@ -106,7 +106,7 @@ export const uploadImageRequest = async (file) => {
     method: 'POST',
     body: file,
     headers: {
-      'Authorization': token
+      'x_authorization': token
     }
   }
 
