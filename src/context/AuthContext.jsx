@@ -11,6 +11,7 @@ function getCookie(name) {
 }
 let token = null
 const setToken = newToken => { token = `Bearer ${newToken}` }
+console.log(token);
 
 
 export const AuthContext = createContext()
@@ -63,6 +64,7 @@ export const AuthProvider = ({children}) => {
       const res = await loginRequest(values)
       if (!res.error) {
         setToken(getCookie('jwt'))
+        console.log(token);
         setUser(res.user)
         setIsLogin(true)
       } else {
