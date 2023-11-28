@@ -1,16 +1,6 @@
 const url = import.meta.env.VITE_BASE_URL
 console.log(url);
 
-export function getCookie(name) { 
-  const re = new RegExp(name + "=([^;]+)"); 
-  const value = re.exec(document.cookie); 
-  return (value != null) ? value[1] : null; 
- }
- 
-const token = `Bearer ${getCookie('jwt')}`
-console.log('token', token);
-console.log('token', document.cookie);
-
 export const registerRequest = async (user) => {
   const options = {
     method: 'POST',
@@ -24,7 +14,7 @@ export const registerRequest = async (user) => {
     if (response.ok) {
       const json = await response.json()
       console.log(json);
-      return json
+       return json
     }
 
   } catch (error) {

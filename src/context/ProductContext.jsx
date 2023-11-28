@@ -10,6 +10,7 @@ import {
 } from "../services/product.services";
 import { useAuth } from "./AuthContext";
 
+
 export const ProductContext = createContext();
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -43,7 +44,7 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const createProduct = async (product) => {
+  const createProduct = async (product, token) => {
     console.log(product);
     try {
       const res = await createProductRequest(product);

@@ -1,7 +1,15 @@
-import {getCookie} from './user.services'
-const token = `Bearer ${getCookie('jwt')}`
 
 const url = import.meta.env.VITE_BASE_URL
+
+function getCookie(name) { 
+  const re = new RegExp(name + "=([^;]+)"); 
+  const value = re.exec(document.cookie); 
+  return (value != null) ? value[1] : null; 
+}
+ 
+const token = `Bearer ${getCookie('jwt')}`
+console.log('token', token);
+console.log('token', document.cookie);
 
 export const getProductRequest = async (id) => {
 
@@ -38,7 +46,7 @@ export const createProductRequest = async (product) => {
     body: product,
     credentials: 'include',
     headers: { 
-      'x_authorization': token
+      'Authorization': `Bearer ${getCookie('jwt')}`
     }
   }
 
@@ -61,7 +69,7 @@ export const updateProductRequest = async (product) => {
     body: product,
     credentials: 'include',
     headers: { 
-      'x_authorization': token
+      'Authorization': `Bearer ${getCookie('jwt')}`
     }
   }
 
@@ -84,7 +92,7 @@ export const deleteProductRequest = async (id) => {
     credentials: 'include',
     headers: { 
       'Content-Type': 'application/json',
-      'x_authorization': token,
+      'Authorization': token,
     }
   }
 
@@ -106,7 +114,7 @@ export const uploadImageRequest = async (file) => {
     method: 'POST',
     body: file,
     headers: {
-      'x_authorization': token
+      'Authorization': token
     }
   }
 
