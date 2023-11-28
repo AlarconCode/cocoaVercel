@@ -1,16 +1,6 @@
 
 const url = import.meta.env.VITE_BASE_URL
 
-function getCookie(name) { 
-  const re = new RegExp(name + "=([^;]+)"); 
-  const value = re.exec(document.cookie); 
-  return (value != null) ? value[1] : null; 
-}
- 
-const token = `Bearer ${getCookie('jwt')}`
-console.log('token', token);
-console.log('token', document.cookie);
-
 export const getProductRequest = async (id) => {
 
   try {
@@ -39,14 +29,14 @@ export const getProductsRequest = async (cat) => {
 
 }
 
-export const createProductRequest = async (product) => {
+export const createProductRequest = async (product, token) => {
 
   const options = {
     method: 'POST',
     body: product,
     credentials: 'include',
     headers: { 
-      'Authorization': `Bearer ${getCookie('jwt')}`
+      'Authorization': token
     }
   }
 
@@ -62,14 +52,14 @@ export const createProductRequest = async (product) => {
 
 }
 
-export const updateProductRequest = async (product) => {
+export const updateProductRequest = async (product, token) => {
 
   const options = {
     method: 'PUT',
     body: product,
     credentials: 'include',
     headers: { 
-      'Authorization': `Bearer ${getCookie('jwt')}`
+      'Authorization': token
     }
   }
 
@@ -85,7 +75,7 @@ export const updateProductRequest = async (product) => {
 
 }
 
-export const deleteProductRequest = async (id) => {
+export const deleteProductRequest = async (id, token) => {
   
   const options = {
     method: 'DELETE',
@@ -108,7 +98,7 @@ export const deleteProductRequest = async (id) => {
 
 }
 
-export const uploadImageRequest = async (file) => {
+export const uploadImageRequest = async (file, token) => {
 
   const options = {
     method: 'POST',

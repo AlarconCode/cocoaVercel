@@ -24,7 +24,7 @@ export const useProduct = () => {
 
 export const ProductProvider = ({ children }) => {
   const [errors, setErrors] =  useState([])
-  const { logout } = useAuth();
+  const { token } = useAuth();
 
   const getSingleProduct = async (id) => {
     try {
@@ -47,7 +47,7 @@ export const ProductProvider = ({ children }) => {
   const createProduct = async (product) => {
     console.log(product);
     try {
-      const res = await createProductRequest(product);
+      const res = await createProductRequest(product, token);
       if (res.error) {
         setErrors(res.message)
         console.log('error del back', res.message);
@@ -59,7 +59,7 @@ export const ProductProvider = ({ children }) => {
 
   const updateProduct = async (product) => {
     try {
-      const res = await updateProductRequest(product);
+      const res = await updateProductRequest(product, token);
       if (res.error) {
         setErrors(res.message)
         console.log('error del back', res.message);
@@ -71,7 +71,7 @@ export const ProductProvider = ({ children }) => {
 
   const deleteProduct = async (id) => {
     try {
-      const res = await deleteProductRequest(id);
+      const res = await deleteProductRequest(id, token);
       return res;
     } catch (error) {
       console.log(error);
