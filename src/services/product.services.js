@@ -41,7 +41,7 @@ export const createProductRequest = async (product, token) => {
   }
 
   try {
-    
+    console.log('createToken', token)
     const res = await fetch(`${url}product`, options)
     const data = await res.json()
     return data

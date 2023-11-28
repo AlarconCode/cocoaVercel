@@ -63,7 +63,8 @@ export const AuthProvider = ({children}) => {
       
       const res = await loginRequest(values)
       if (!res.error) {
-        setToken(getCookie('jwt'))
+        // setToken(getCookie('jwt'))
+        setToken(res.token)
         console.log(token);
         setUser(res.user)
         setIsLogin(true)
