@@ -44,7 +44,7 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const createProduct = async (product, token) => {
+  const createProduct = async (product) => {
     console.log(product);
     try {
       const res = await createProductRequest(product);
