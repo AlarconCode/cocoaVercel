@@ -2,20 +2,36 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Header from './Components/Header/Header'
 import ListCards from "./Components/ListCards/ListCards";
-import { AuthProvider } from "./context/AuthContext";
+import { useAuth } from "./context/AuthContext";
 import { LoginPage } from "./Pages/LoginPage/LoginPage";
 import { ProductFormPage } from "./Pages/ProductFormPage/ProductFormPage";
 import { ProductProvider } from "./context/ProductContext";
 import { HomePage } from "./Pages/HomePage/HomePage";
 import { Footer } from "./Components/Footer/Footer";
 import { RegisterPage } from "./Pages/Register/RegisterPage";
+import { useEffect } from "react";
+import { isAuthRequest } from "./services/user.services";
 
 
 function App() {
   const location = useLocation()
+  const {setIsLogin} = useAuth()
+
+  useEffect(() => {
+    const func = async () => {
+      const res = await isAuthRequest()
+      console.log(res) 
+      if (!res.error) {
+          setIsLogin(true)
+        } else {
+          setIsLogin(false)
+        }
+      }
+    func()
+  }, [setIsLogin])
 
   return (
-    <AuthProvider>
+   
       <ProductProvider>
           <Header />
           <Routes>
@@ -32,7 +48,6 @@ function App() {
           </Routes>
           {location.pathname !== '/login' && location.pathname !== '/registro'  && <Footer />}
       </ProductProvider>
-    </AuthProvider>
   )
 }
 

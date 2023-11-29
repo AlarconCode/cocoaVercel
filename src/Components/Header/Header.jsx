@@ -13,6 +13,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { isLogin, logout } = useAuth();
   const navigate = useNavigate();
+
   const handleToggle = (e) => {
     e.stopPropagation();
     setIsOpen((oldIsOpen) => !oldIsOpen);

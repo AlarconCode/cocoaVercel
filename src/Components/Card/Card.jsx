@@ -45,7 +45,7 @@ export const Card = ({ product, index, deleteCard }) => {
               {/* <img alt={desc} src={cocoa} className="cocoaName" /> */}
               <h3>{desc}</h3>
               <p className="ingredientes">{ingredientes}</p>
-              <p className="price">{price}€</p>
+              <p className="price">{new Intl.NumberFormat().format(price)}€</p>
             </div>
           </div>
         </div>

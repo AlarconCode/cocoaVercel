@@ -11,11 +11,9 @@ export const registerRequest = async (user) => {
   try {
 
     const response = await fetch(`${url}register`, options)
-    if (response.ok) {
-      const json = await response.json()
-      console.log(json);
-       return json
-    }
+    const json = await response.json()
+    console.log(json);
+    return json
 
   } catch (error) {
     console.log(error); 
@@ -60,6 +58,28 @@ export const logoutRequest = async () => {
   try {
 
     const response = await fetch(`${url}logout`, options)
+    const json = await response.json()
+    return json
+
+  } catch (error) {
+    console.log(error); 
+  }
+
+}
+
+export const isAuthRequest = async () => {
+
+  const options = {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+
+    const response = await fetch(`${url}verify-token`, options)
     const json = await response.json()
     return json
 

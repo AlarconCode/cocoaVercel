@@ -1,8 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { loginRequest, registerRequest, logoutRequest } from "../services/user.services";
 import { node } from "prop-types";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext()
 
@@ -19,35 +17,26 @@ export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null)
   const [isLogin, setIsLogin] = useState(false)
   const [error, setError] =  useState([])
-  const [cookies] = useCookies()
-  const navigate = useNavigate()
 
   const register = async (user) => {
     try {
 
       const res = await registerRequest(user)
+      console.log(res);
       if (!res.error) {
-
         setUser(res.newUser)
         setIsLogin(true)
-      
       } else {
-
         setError(res.message)
-        console.log(error);
-
+        console.log(res.message);
       } 
 
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
   const login = async (values) => {
-    
-    if (cookies.jwt) {
-      navigate('/')
-    }
 
     try {
       

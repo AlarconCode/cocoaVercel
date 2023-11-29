@@ -13,8 +13,8 @@ const initialValues = {
 } 
 
 const validationSchema = Yup.object({
-  name: Yup.string().min(3,'Debe tener mas de 3 caracteres').required('Campo requerido'),
-  email: Yup.string().email('Introduce un email válido').required('Campo requerido'),
+  name: Yup.string().min(3,'Debe tener mas de 3 caracteres').required('Introduce un nombre'),
+  email: Yup.string().email('Introduce un email válido').required('Introduce un email'),
   password: Yup.string()
     .min(8, 'La contraseña debe tener 8 caracteres')
     .matches(/[0-9]/, 'El Password requiere a número')
@@ -29,12 +29,19 @@ const validationSchema = Yup.object({
 // Formulario con Componentes Formik Contexto
 export const RegisterForm = () => {
   
-  const {register, isLogin, error} = useAuth()
+  const {register, isLogin, error, setError} = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
     if (isLogin) navigate('/')
-  }, [isLogin, navigate])  
+  }, [isLogin, navigate])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setError([]);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, [error, setError]);
   
   const onSubmit = async (values, onSubmitProps) => {
     await register(values)
@@ -50,9 +57,13 @@ export const RegisterForm = () => {
       {formik => (
         <StyledForm onSubmit={formik.handleSubmit}>
           <h1 className="titleRegisterForm">Registro</h1>
-          {
-            error ? <div className="errorMessage">{error}</div> : null
-          }
+          {error
+            ? error.map((message, index) => (
+                <div key={index} className="errorMessage">
+                  {message}
+                </div>
+              ))
+            : null}
           <div className="form-control">
             <StyledInput name='name' type='text' placeholder='Nombre'/>
             <ErrorMessage name="name" component='span' />

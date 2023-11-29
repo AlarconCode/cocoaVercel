@@ -10,7 +10,7 @@ import { string } from "prop-types";
 // Formulario con Componentes Formik Contexto
 export const ProductForm = ({ ...props }) => {
   const [values, setValues] = useState(null);
-  const {createProduct, getSingleProduct, updateProduct, errors, setErrors } = useProduct();
+  const {createProduct, getSingleProduct, updateProduct, errors, setErrors, success } = useProduct();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -78,9 +78,9 @@ export const ProductForm = ({ ...props }) => {
     formData.append("ingredientes", values.ingredientes);
     formData.append("price", values.price);
     formData.append("img", values.img);
-
+    
     Swal.fire({
-      title: "¿Actualizar?",
+      title: "¿Desea Actualizar el producto?",
       icon: "info",
       confirmButtonColor: "green",
       confirmButtonText: "Aceptar",
@@ -88,22 +88,18 @@ export const ProductForm = ({ ...props }) => {
       cancelButtonText: "Cancelar",
       cancelButtonColor: "red",
     }).then((res) => {
-      updateProduct(formData);
-      if (errors && errors.length > 0 || errors[0] === "jwt must be provided") {
-        console.log(errors.join('\n'));
+      updateProduct(formData)
+      if (res.isConfirmed && errors.length > 0) {
         Swal.fire({ icon: "error", title: "Error", text: errors.join('\n') });
         setErrors([]);
         onSubmitProps.setSubmitting(false);
-      } else if (errors.length === 0) {
-        Swal.fire({
-          icon: "success",
-          title: `${values.desc} Actualizada`,
-          timer: 2000,
-          showConfirmButton: false,
-        });
-        setTimeout(() => {
-          navigate(`/${values.cat}`);
-        }, 2000);
+        return
+      } else if (res.isConfirmed && errors.length === 0) { 
+        Swal.fire({ 
+          icon: "success", 
+          title: success, 
+          timer: 2000, showConfirmButton: false});
+        onSubmitProps.setSubmitting(false);
       }
       if (res.isDismissed) {
         onSubmitProps.setSubmitting(false);
@@ -131,7 +127,7 @@ export const ProductForm = ({ ...props }) => {
     >
       {(formik) => {
         // console.log('formikProps', formik)
-        console.log(formik.values);
+        // console.log(formik.values);
         return (
           <StyledForm
             onSubmit={formik.handleSubmit}

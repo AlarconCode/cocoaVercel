@@ -22,6 +22,7 @@ export const useProduct = () => {
 
 export const ProductProvider = ({ children }) => {
   const [errors, setErrors] =  useState([])
+  const [success, setSuccess] =  useState('')
 
   const getSingleProduct = async (id) => {
     try {
@@ -60,6 +61,8 @@ export const ProductProvider = ({ children }) => {
       if (res.error) {
         setErrors(res.message)
         console.log('error del back', res.message);
+      } else {
+        setSuccess(res.message)
       }
     } catch (error) {
       console.log(error);
@@ -93,7 +96,8 @@ export const ProductProvider = ({ children }) => {
         deleteProduct,
         uploadImg,
         errors,
-        setErrors
+        setErrors,
+        success,
       }}
     >
       {children}
