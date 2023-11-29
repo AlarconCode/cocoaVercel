@@ -29,7 +29,7 @@ export const getProductsRequest = async (cat) => {
 
 }
 
-export const createProductRequest = async (product, token) => {
+export const createProductRequest = async (product) => {
 
   const options = {
     method: 'POST',
@@ -38,7 +38,6 @@ export const createProductRequest = async (product, token) => {
   }
 
   try {
-    console.log('createToken', token)
     const res = await fetch(`${url}product`, options)
     const data = await res.json()
     return data
@@ -49,7 +48,7 @@ export const createProductRequest = async (product, token) => {
 
 }
 
-export const updateProductRequest = async (product, token) => {
+export const updateProductRequest = async (product) => {
 
   const options = {
     method: 'PUT',
@@ -58,7 +57,6 @@ export const updateProductRequest = async (product, token) => {
   }
 
   try {
-    console.log('updateToken', token);
     const res = await fetch(`${url}product/${product.get('_id')}`, options)
     const data = await res.json()
     return data
