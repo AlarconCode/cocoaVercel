@@ -1,4 +1,3 @@
-import {token} from './user.services'
 
 const url = import.meta.env.VITE_BASE_URL
 
@@ -36,9 +35,6 @@ export const createProductRequest = async (product) => {
     method: 'POST',
     body: product,
     credentials: 'include',
-    headers: { 
-      'Authorization': token
-    }
   }
 
   try {
@@ -59,9 +55,6 @@ export const updateProductRequest = async (product) => {
     method: 'PUT',
     body: product,
     credentials: 'include',
-    headers: { 
-      'Authorization': token
-    }
   }
 
   try {
@@ -82,7 +75,6 @@ export const deleteProductRequest = async (id) => {
     method: 'DELETE',
     credentials: 'include',
     headers: { 
-      'Authorization': token,
       'Content-Type': 'application/json'
     }
   }
@@ -104,9 +96,6 @@ export const uploadImageRequest = async (file) => {
   const options = {
     method: 'POST',
     body: file,
-    headers: {
-      'Authorization': token
-    }
   }
 
   try {
