@@ -99,6 +99,9 @@ export const ProductForm = ({ ...props }) => {
           icon: "success", 
           title: success, 
           timer: 2000, showConfirmButton: false});
+          setTimeout(() => {
+            navigate(`/${values.cat}`);
+          }, 2000);
         onSubmitProps.setSubmitting(false);
       }
       if (res.isDismissed) {
