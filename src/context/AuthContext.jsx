@@ -4,16 +4,6 @@ import { node } from "prop-types";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-function getCookie(name) { 
-  const re = new RegExp(name + "=([^;]+)"); 
-  const value = re.exec(document.cookie); 
-  return (value != null) ? value[1] : null; 
-}
-let token = null
-const setToken = newToken => { token = `Bearer ${newToken}` }
-console.log(token);
-
-
 export const AuthContext = createContext()
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -63,9 +53,6 @@ export const AuthProvider = ({children}) => {
       
       const res = await loginRequest(values)
       if (!res.error) {
-        // setToken(getCookie('jwt'))
-        setToken(res.token)
-        console.log(token);
         setUser(res.user)
         setIsLogin(true)
       } else {
@@ -85,7 +72,7 @@ export const AuthProvider = ({children}) => {
     
     try {
 
-      const res = await logoutRequest(token)
+      const res = await logoutRequest()
       console.log(res);
       setUser(null)
       setIsLogin(false)
@@ -106,8 +93,7 @@ export const AuthProvider = ({children}) => {
         isLogin,
         setIsLogin,
         error,
-        setError,
-        token
+        setError
       }}
     >
       {children}

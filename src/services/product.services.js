@@ -34,10 +34,7 @@ export const createProductRequest = async (product, token) => {
   const options = {
     method: 'POST',
     body: product,
-    credentials: 'include',
-    headers: { 
-      'Authorization': token
-    }
+    credentials: 'include'
   }
 
   try {
@@ -57,10 +54,7 @@ export const updateProductRequest = async (product, token) => {
   const options = {
     method: 'PUT',
     body: product,
-    credentials: 'include',
-    headers: { 
-      'Authorization': token
-    }
+    credentials: 'include'
   }
 
   try {
@@ -75,14 +69,13 @@ export const updateProductRequest = async (product, token) => {
 
 }
 
-export const deleteProductRequest = async (id, token) => {
+export const deleteProductRequest = async (id) => {
   
   const options = {
     method: 'DELETE',
     credentials: 'include',
     headers: { 
-      'Content-Type': 'application/json',
-      'Authorization': token,
+      'Content-Type': 'application/json'
     }
   }
 
@@ -98,14 +91,11 @@ export const deleteProductRequest = async (id, token) => {
 
 }
 
-export const uploadImageRequest = async (file, token) => {
+export const uploadImageRequest = async (file) => {
 
   const options = {
     method: 'POST',
-    body: file,
-    headers: {
-      'Authorization': token
-    }
+    body: file
   }
 
   try {

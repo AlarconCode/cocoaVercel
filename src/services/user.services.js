@@ -45,14 +45,13 @@ export const loginRequest = async (user) => {
   
 }
 
-export const logoutRequest = async (token) => {
+export const logoutRequest = async () => {
 
   
   const options = {
     method: 'POST',
     credentials: 'include',
     headers: { 
-      'Authorization': token,
       'Content-Type': 'application/json'
     }
   }
