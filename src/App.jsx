@@ -11,7 +11,6 @@ import { Footer } from "./Components/Footer/Footer";
 import { RegisterPage } from "./Pages/Register/RegisterPage";
 import { useEffect } from "react";
 import { isAuthRequest } from "./services/user.services";
-import Swal from "sweetalert2";
 
 
 function App() {
@@ -19,32 +18,18 @@ function App() {
   const {isLogin, setIsLogin} = useAuth()
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const res = await isAuthRequest();
-      console.log(res);
-      if (!res.error && res.message === 'token verified') {
-        setIsLogin(true);
-      } else if (res.error && res.message[0] === 'Token required') {
-        setIsLogin(false);
-        if (location.pathname !== '/login' && location.pathname !== '/registro') {
-          Swal.fire({
-            title: 'Inicia sesión para continuar',
-            icon: 'warning',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#7FABC2',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = '/login';
-            } 
-          });
+    
+      const checkAuth = async () => {
+        const res = await isAuthRequest()
+        console.log(res) 
+        if (!res.error && res.message[0] === 'Token verified') setIsLogin(true)
+        if (res.error && res.message[0] === 'Token required') {
+          console.log('no hay token')
+          setIsLogin(false)
         }
-      }
-    };
-  
-    if (!isLogin && location.pathname !== '/login' && location.pathname !== '/registro') {
-      checkAuth();
-    }
-  }, []);
+      } 
+      checkAuth()
+  }, [isLogin, setIsLogin])
 
   return (
    
