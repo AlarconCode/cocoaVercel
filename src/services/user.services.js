@@ -81,10 +81,16 @@ export const isAuthRequest = async () => {
 
     const response = await fetch(`${url}verify-token`, options)
     const json = await response.json()
-    return json
+
+    if (json.error === true) {
+      throw new Error(json.message)
+    }
+
+    return !json.error
 
   } catch (error) {
-    console.log(error); 
+    console.log(error);
+    return false 
   }
 
 }

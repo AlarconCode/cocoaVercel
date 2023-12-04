@@ -15,21 +15,17 @@ import { isAuthRequest } from "./services/user.services";
 
 function App() {
   const location = useLocation()
-  const {isLogin, setIsLogin} = useAuth()
+  const {setIsLogin} = useAuth()
 
   useEffect(() => {
-    
-      const checkAuth = async () => {
-        const res = await isAuthRequest()
-        console.log(res) 
-        if (!res.error && res.message[0] === 'Token verified') setIsLogin(true)
-        if (res.error && res.message[0] === 'Token required') {
-          console.log('no hay token')
-          setIsLogin(false)
-        }
-      } 
-      checkAuth()
-  }, [isLogin, setIsLogin])
+    const checkAuth = async () => {
+      const valid = await isAuthRequest();
+      console.log(valid);
+      setIsLogin(valid);
+    };
+
+    checkAuth();
+  }, []);
 
   return (
    
