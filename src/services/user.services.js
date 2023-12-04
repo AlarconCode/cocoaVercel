@@ -83,9 +83,11 @@ export const isAuthRequest = async () => {
     const json = await response.json()
 
     if (json.error === true) {
+      console.log(json.message);
       throw new Error(json.message)
     }
 
+    console.log(json.message);
     return !json.error
 
   } catch (error) {
