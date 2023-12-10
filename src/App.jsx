@@ -19,13 +19,14 @@ function App() {
 
   useEffect(() => {
     const checkAuth = async () => {
+      console.log('checkAuth');
       const valid = await isAuthRequest();
       console.log(valid);
       setIsLogin(valid);
     };
 
     checkAuth();
-  }, []);
+  }, [setIsLogin]);
 
   return (
    
@@ -43,7 +44,7 @@ function App() {
             <Route path="registro" element={<RegisterPage />} />
             <Route path="login" element={<LoginPage />} />
           </Routes>
-          {location.pathname !== '/login' && location.pathname !== '/registro'  && <Footer />}
+          {location.pathname !== '/login' && location.pathname !== '/registro' && <Footer />}
       </ProductProvider>
   )
 }

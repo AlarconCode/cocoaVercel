@@ -22,6 +22,14 @@ export const Card = ({ product, index, deleteCard }) => {
     });
   };
 
+  const formatPrice = (price) => { 
+    return new Intl.NumberFormat('es-ES', { 
+            style: 'currency', 
+            currency: 'EUR', 
+            minimumFractionDigits: 2 })
+            .format(price)
+  }
+  
   // JSX Card
   return (
     <Wrapper>
@@ -45,11 +53,7 @@ export const Card = ({ product, index, deleteCard }) => {
               {/* <img alt={desc} src={cocoa} className="cocoaName" /> */}
               <h3>{desc}</h3>
               <p className="ingredientes">{ingredientes}</p>
-              <p className="price">{ new Intl.NumberFormat('ES-ES', { 
-                style: 'currency', 
-                currency: 'EUR', 
-                minimumFractionDigits: 2 })
-                .format(price) }</p>
+              <p className="price">{ price ? formatPrice(price) : '0,00 €' }</p>
             </div>
           </div>
         </div>
